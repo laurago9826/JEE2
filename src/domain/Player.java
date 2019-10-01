@@ -3,49 +3,75 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Player extends User {
+	public Player(PlayerBuilder pb) {
+		super(pb.email, pb.password);
+		this.accountNumber = pb.accountNumber;
+		this.balance = pb.balance;
+		this.birth = pb.birth;
+		this.currency = pb.currency;
+		this.name = pb.name;
+	}
+
 	String name;
 	Integer accountNumber;
 	BigDecimal balance;
 	LocalDate birth;
 	Currency currency;
 
-	public String getName() {
-		return name;
-	}
+	// ---BUILDER---
+	public static class PlayerBuilder {
+		String name;
+		Integer accountNumber;
+		BigDecimal balance;
+		LocalDate birth;
+		Currency currency;
+		String email;
+		String password;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+		private PlayerBuilder() {
+		}
 
-	public Integer getAccountNumber() {
-		return accountNumber;
-	}
+		public PlayerBuilder newInstance() {
+			return new PlayerBuilder();
+		}
 
-	public void setAccountNumber(Integer accountNumber) {
-		this.accountNumber = accountNumber;
-	}
+		public PlayerBuilder setName(String name) {
+			this.name = name;
+			return this;
+		}
 
-	public BigDecimal getBalance() {
-		return balance;
-	}
+		public PlayerBuilder setAccountNumber(Integer accountNumber) {
+			this.accountNumber = accountNumber;
+			return this;
+		}
 
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
-	}
+		public PlayerBuilder setBalance(BigDecimal balance) {
+			this.balance = balance;
+			return this;
+		}
 
-	public LocalDate getBirth() {
-		return birth;
-	}
+		public PlayerBuilder setBirth(LocalDate birth) {
+			this.birth = birth;
+			return this;
+		}
 
-	public void setBirth(LocalDate birth) {
-		this.birth = birth;
-	}
+		public PlayerBuilder setCurrency(Currency currency) {
+			this.currency = currency;
+			return this;
+		}
 
-	public Currency getCurrency() {
-		return currency;
-	}
+		public PlayerBuilder setEmail(String email) {
+			this.email = email;
+			return this;
+		}
 
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
+		public PlayerBuilder setPassword(String password) {
+			this.password = password;
+			return this;
+		}
+
+		public Player build() {
+			return new Player(this);
+		}
 	}
 }

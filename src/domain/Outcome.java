@@ -6,28 +6,42 @@ public class Outcome {
 	Bet bet;
 	List<OutcomeOdd> outcomeOdds;
 
-	public String getDescription() {
-		return description;
+	public Outcome(OutcomeBuilder ob) {
+		this.description = ob.description;
+		this.bet = ob.bet;
+		this.outcomeOdds = ob.outcomeOdds;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	// ----BUILDER----
+	public static class OutcomeBuilder {
+		String description;
+		Bet bet;
+		List<OutcomeOdd> outcomeOdds;
 
-	public Bet getBet() {
-		return bet;
-	}
+		public OutcomeBuilder() {
+		}
 
-	public void setBet(Bet bet) {
-		this.bet = bet;
-	}
+		public OutcomeBuilder newInstance() {
+			return new OutcomeBuilder();
+		}
 
-	public List<OutcomeOdd> getOutcomeOdds() {
-		return outcomeOdds;
-	}
+		public OutcomeBuilder setDescription(String description) {
+			this.description = description;
+			return this;
+		}
 
-	public void setOutcomeOdds(List<OutcomeOdd> outcomeOdds) {
-		this.outcomeOdds = outcomeOdds;
-	}
+		public OutcomeBuilder setBet(Bet bet) {
+			this.bet = bet;
+			return this;
+		}
 
+		public OutcomeBuilder setOutcomeOdds(List<OutcomeOdd> outcomeOdds) {
+			this.outcomeOdds = outcomeOdds;
+			return this;
+		}
+
+		public Outcome build() {
+			return new Outcome(this);
+		}
+	}
 }

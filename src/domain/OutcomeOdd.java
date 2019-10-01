@@ -10,43 +10,56 @@ public class OutcomeOdd {
 	Currency currency;
 	Outcome outcome;
 
-	public BigDecimal getOddValue() {
-		return oddValue;
+	public OutcomeOdd(OutcomeOddBuilder oob) {
+		this.currency = oob.currency;
+		this.oddValue = oob.oddValue;
+		this.outcome = oob.outcome;
+		this.validFrom = oob.validFrom;
+		this.validUntil = oob.validUntil;
 	}
 
-	public void setOddValue(BigDecimal oddValue) {
-		this.oddValue = oddValue;
-	}
+	// ---BUILDER---
+	public static class OutcomeOddBuilder {
+		BigDecimal oddValue;
+		LocalDateTime validFrom;
+		LocalDateTime validUntil;
+		Currency currency;
+		Outcome outcome;
 
-	public LocalDateTime getValidFrom() {
-		return validFrom;
-	}
+		private OutcomeOddBuilder() {
+		}
 
-	public void setValidFrom(LocalDateTime validFrom) {
-		this.validFrom = validFrom;
-	}
+		public OutcomeOddBuilder newInstance() {
+			return new OutcomeOddBuilder();
+		}
 
-	public LocalDateTime getValidUntil() {
-		return validUntil;
-	}
+		public OutcomeOddBuilder setOddValue(BigDecimal oddValue) {
+			this.oddValue = oddValue;
+			return this;
+		}
 
-	public void setValidUntil(LocalDateTime validUntil) {
-		this.validUntil = validUntil;
-	}
+		public OutcomeOddBuilder setValidFrom(LocalDateTime validFrom) {
+			this.validFrom = validFrom;
+			return this;
+		}
 
-	public Currency getCurrency() {
-		return currency;
-	}
+		public OutcomeOddBuilder setValidUntil(LocalDateTime validUntil) {
+			this.validUntil = validUntil;
+			return this;
+		}
 
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
-	}
+		public OutcomeOddBuilder setCurrency(Currency currency) {
+			this.currency = currency;
+			return this;
+		}
 
-	public Outcome getOutcome() {
-		return outcome;
-	}
+		public OutcomeOddBuilder setOutcome(Outcome outcome) {
+			this.outcome = outcome;
+			return this;
+		}
 
-	public void setOutcome(Outcome outcome) {
-		this.outcome = outcome;
+		public OutcomeOdd build() {
+			return new OutcomeOdd(this);
+		}
 	}
 }
