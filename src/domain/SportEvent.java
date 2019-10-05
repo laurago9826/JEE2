@@ -1,8 +1,9 @@
 package domain;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SportEvent {
+public abstract class SportEvent {
 	String title;
 	LocalDateTime startDate;
 	LocalDateTime endDate;
@@ -13,8 +14,24 @@ public class SportEvent {
 		this.title = seb.title;
 		this.startDate = seb.startDate;
 		this.endDate = seb.endDate;
-		this.bets = seb.bets;
 		this.result = seb.result;
+		this.bets = new ArrayList<Bet>();
+	}
+
+	public void addBet(Bet bet) {
+		bets.add(bet);
+	}
+
+	public List<Bet> getBets() {
+		return bets;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public LocalDateTime getStartDate() {
+		return startDate;
 	}
 
 	// ---BUILDER---
@@ -22,13 +39,12 @@ public class SportEvent {
 		String title;
 		LocalDateTime startDate;
 		LocalDateTime endDate;
-		List<Bet> bets;
 		Result result;
 
 		private SportEventBuilder() {
 		}
 
-		public SportEventBuilder newInstance() {
+		public static SportEventBuilder newInstance() {
 			return new SportEventBuilder();
 		}
 
@@ -47,18 +63,12 @@ public class SportEvent {
 			return this;
 		}
 
-		public SportEventBuilder setBets(List<Bet> bets) {
-			this.bets = bets;
-			return this;
+		public SportEvent buildTennisEvent() {
+			return new TennisSportEvent(this);
 		}
 
-		public SportEventBuilder setResult(Result result) {
-			this.result = result;
-			return this;
-		}
-
-		public SportEvent build() {
-			return new SportEvent(this);
+		public SportEvent buildFootballEvent() {
+			return new FootballSportEvent(this);
 		}
 	}
 

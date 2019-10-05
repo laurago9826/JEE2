@@ -18,6 +18,26 @@ public class Player extends User {
 	LocalDate birth;
 	Currency currency;
 
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void increaseBalance(BigDecimal by) {
+		this.balance = balance.add(by);
+	}
+
+	public void decreaseBalance(BigDecimal by) {
+		this.balance = balance.subtract(by);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
 	// ---BUILDER---
 	public static class PlayerBuilder {
 		String name;
@@ -31,7 +51,7 @@ public class Player extends User {
 		private PlayerBuilder() {
 		}
 
-		public PlayerBuilder newInstance() {
+		public static PlayerBuilder newInstance() {
 			return new PlayerBuilder();
 		}
 
@@ -74,4 +94,5 @@ public class Player extends User {
 			return new Player(this);
 		}
 	}
+
 }

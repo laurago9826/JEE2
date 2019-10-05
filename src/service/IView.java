@@ -1,5 +1,6 @@
 package service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import domain.Wager;
 
 public interface IView {
 
-	Player readPlayerData();
+	Player readPlayerData() throws IOException;
 
 	void printWelcomeMessage(Player player);
 
@@ -18,9 +19,9 @@ public interface IView {
 
 	void printOutcomeOdds(List<SportEvent> events);
 
-	OutcomeOdd selectOutcomeOdd(List<SportEvent> events);
+	OutcomeOdd selectOutcomeOdd(List<SportEvent> events) throws IOException;
 
-	BigDecimal readWagerAmount();
+	BigDecimal readWagerAmount() throws IOException;
 
 	void printWagerSaved(Wager wager);
 

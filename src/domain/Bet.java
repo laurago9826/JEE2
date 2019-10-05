@@ -1,25 +1,48 @@
 package domain;
+
+import java.util.ArrayList;
 import java.util.List;
 
-final class Bet {
+public class Bet {
 	String description;
 	BetType betType;
 	SportEvent sportEvent;
-	List<Outcome> outcome;
-	
+	List<Outcome> outcomes;
+
 	public Bet(BetBuilder bb) {
 		this.description = bb.description;
 		this.betType = bb.betType;
 		this.sportEvent = bb.sportEvent;
-		this.outcome = bb.outcome;
+		this.outcomes = new ArrayList<Outcome>();
+
+		this.sportEvent.addBet(this);
 	}
 	
+	public String getDescription() {
+		return description;
+	}
 
+	public List<Outcome> getOutcomes() {
+		return outcomes;
+	}
+
+	public SportEvent getSportEvent() {
+		return sportEvent;
+	}
+
+	public BetType getBetType() {
+		return betType;
+	}
+
+	public void addOutcome(Outcome outcome) {
+		outcomes.add(outcome);
+	}
+
+	// ---BUILDER---
 	public static class BetBuilder {
 		String description;
 		BetType betType;
 		SportEvent sportEvent;
-		List<Outcome> outcome;
 
 		public static BetBuilder newInstance() {
 			return new BetBuilder();
@@ -40,11 +63,6 @@ final class Bet {
 
 		public BetBuilder setSportEvent(SportEvent sportEvent) {
 			this.sportEvent = sportEvent;
-			return this;
-		}
-
-		public BetBuilder setOutcome(List<Outcome> outcome) {
-			this.outcome = outcome;
 			return this;
 		}
 

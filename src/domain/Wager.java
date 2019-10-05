@@ -16,16 +16,38 @@ public class Wager {
 		this.currency = wb.currency;
 		this.odd = wb.odd;
 		this.player = wb.player;
-		this.processed = wb.processed;
-		this.timestampCreated = wb.timestampCreated;
-		this.win = wb.win;
+		this.processed = false;
+		this.timestampCreated = LocalDateTime.now();
+		this.win = false;
 	}
 
+	public OutcomeOdd getOdd() {
+		return odd;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public boolean isWin() {
+		return win;
+	}
+
+	public LocalDateTime getTimestampCreated() {
+		return timestampCreated;
+	}
+
+	public void setWin(boolean win) {
+		this.win = win;
+	}
+
+	// ---BUILDER---
 	public static class WagerBuilder {
 		BigDecimal amount;
-		LocalDateTime timestampCreated;
-		boolean processed;
-		boolean win;
 		OutcomeOdd odd;
 		Currency currency;
 		Player player;
@@ -33,27 +55,12 @@ public class Wager {
 		private WagerBuilder() {
 		}
 
-		public WagerBuilder newInstance() {
+		public static WagerBuilder newInstance() {
 			return new WagerBuilder();
 		}
 
 		public WagerBuilder setAmount(BigDecimal amount) {
 			this.amount = amount;
-			return this;
-		}
-
-		public WagerBuilder setTimestampCreated(LocalDateTime timestampCreated) {
-			this.timestampCreated = timestampCreated;
-			return this;
-		}
-
-		public WagerBuilder setProcessed(boolean processed) {
-			this.processed = processed;
-			return this;
-		}
-
-		public WagerBuilder setWin(boolean win) {
-			this.win = win;
 			return this;
 		}
 

@@ -16,6 +16,24 @@ public class OutcomeOdd {
 		this.outcome = oob.outcome;
 		this.validFrom = oob.validFrom;
 		this.validUntil = oob.validUntil;
+
+		this.outcome.addOdds(this);
+	}
+
+	public BigDecimal getOddValue() {
+		return oddValue;
+	}
+
+	public LocalDateTime getValidFrom() {
+		return validFrom;
+	}
+
+	public LocalDateTime getValidUntil() {
+		return validUntil;
+	}
+
+	public Outcome getOutcome() {
+		return outcome;
 	}
 
 	// ---BUILDER---
@@ -29,7 +47,7 @@ public class OutcomeOdd {
 		private OutcomeOddBuilder() {
 		}
 
-		public OutcomeOddBuilder newInstance() {
+		public static OutcomeOddBuilder newInstance() {
 			return new OutcomeOddBuilder();
 		}
 

@@ -1,4 +1,6 @@
 package domain;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Outcome {
@@ -9,19 +11,36 @@ public class Outcome {
 	public Outcome(OutcomeBuilder ob) {
 		this.description = ob.description;
 		this.bet = ob.bet;
-		this.outcomeOdds = ob.outcomeOdds;
+		this.outcomeOdds = new ArrayList<OutcomeOdd>();
+
+		this.bet.addOutcome(this);
+	}
+
+	public void addOdds(OutcomeOdd outcomeOdd) {
+		this.outcomeOdds.add(outcomeOdd);
+	}
+
+	public List<OutcomeOdd> getOutcomeOdds() {
+		return outcomeOdds;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Bet getBet() {
+		return bet;
 	}
 
 	// ----BUILDER----
 	public static class OutcomeBuilder {
 		String description;
 		Bet bet;
-		List<OutcomeOdd> outcomeOdds;
 
 		public OutcomeBuilder() {
 		}
 
-		public OutcomeBuilder newInstance() {
+		public static OutcomeBuilder newInstance() {
 			return new OutcomeBuilder();
 		}
 
@@ -32,11 +51,6 @@ public class Outcome {
 
 		public OutcomeBuilder setBet(Bet bet) {
 			this.bet = bet;
-			return this;
-		}
-
-		public OutcomeBuilder setOutcomeOdds(List<OutcomeOdd> outcomeOdds) {
-			this.outcomeOdds = outcomeOdds;
 			return this;
 		}
 
