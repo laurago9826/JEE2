@@ -15,16 +15,13 @@ public class App {
 		this.view = view;
 	}
 
+
+
 	public void play() {
 		createPlayer();
 		doBettings();
 		calculateResults();
 		printResults();
-	}
-
-	public static void main(String[] args) {
-		App app = new App(new SportsBettingService(), new View());
-		app.play();
 	}
 
 	private void createPlayer() {
