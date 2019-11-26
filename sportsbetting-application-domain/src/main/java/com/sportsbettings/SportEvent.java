@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SportEvent {
-	String title;
-	LocalDateTime startDate;
-	LocalDateTime endDate;
-	List<Bet> bets;
-	Result result;
+	private String title;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
+	private List<Bet> bets = new ArrayList<Bet>();
+	private Result result;
 
-	public SportEvent(SportEventBuilder seb) {
+	protected SportEvent(SportEventBuilder seb) {
 		this.title = seb.title;
 		this.startDate = seb.startDate;
 		this.endDate = seb.endDate;
 		this.result = seb.result;
-		this.bets = new ArrayList<Bet>();
 	}
 
 	public void addBet(Bet bet) {

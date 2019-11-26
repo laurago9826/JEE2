@@ -1,6 +1,9 @@
 com\sportsbettings\OutcomeOdd$OutcomeOddBuilder.class
 com\sportsbettings\Wager.class
 com\sportsbettings\TennisSportEvent.class
+com\sportsbettings\Bet$1.class
+com\sportsbettings\Outcome$1.class
+com\sportsbettings\Wager$1.class
 com\sportsbettings\Player.class
 com\sportsbettings\Outcome$OutcomeBuilder.class
 com\sportsbettings\SportEvent.class
@@ -14,5 +17,7 @@ com\sportsbettings\Player$PlayerBuilder.class
 com\sportsbettings\SportEvent$SportEventBuilder.class
 com\sportsbettings\Outcome.class
 com\sportsbettings\OutcomeOdd.class
+com\sportsbettings\Player$1.class
+com\sportsbettings\OutcomeOdd$1.class
 com\sportsbettings\Bet.class
 com\sportsbettings\Wager$WagerBuilder.class

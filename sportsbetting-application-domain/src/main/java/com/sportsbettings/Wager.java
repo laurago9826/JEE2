@@ -3,15 +3,15 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Wager {
-	BigDecimal amount;
-	LocalDateTime timestampCreated;
-	boolean processed;
-	boolean win;
-	OutcomeOdd odd;
-	Currency currency;
-	Player player;
+	private BigDecimal amount;
+	private LocalDateTime timestampCreated;
+	private boolean processed;
+	private boolean win;
+	private OutcomeOdd odd;
+	private Currency currency;
+	private Player player;
 
-	public Wager(WagerBuilder wb) {
+	private Wager(WagerBuilder wb) {
 		this.amount = wb.amount;
 		this.currency = wb.currency;
 		this.odd = wb.odd;

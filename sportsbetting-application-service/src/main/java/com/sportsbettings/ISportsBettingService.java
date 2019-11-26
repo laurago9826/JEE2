@@ -4,15 +4,15 @@ import java.util.List;
 
 public interface ISportsBettingService {
 
-	void SavePlayer(Player player);
+	void savePlayer(Player player);
 
 	Player findPlayer();
 
 	List<SportEvent> findAllSportEvents();
 
-	void SaveWager(Wager wager);
+	void saveWager(Wager wager);
 
 	List<Wager> findAllWagers();
 
-	void CalculateResults();
+	void calculateResults();
 }

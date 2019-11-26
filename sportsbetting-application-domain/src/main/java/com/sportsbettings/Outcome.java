@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Outcome {
-	String description;
-	Bet bet;
-	List<OutcomeOdd> outcomeOdds;
+	private String description;
+	private Bet bet;
+	private List<OutcomeOdd> outcomeOdds = new ArrayList<OutcomeOdd>();
 
-	public Outcome(OutcomeBuilder ob) {
+	private Outcome(OutcomeBuilder ob) {
 		this.description = ob.description;
 		this.bet = ob.bet;
-		this.outcomeOdds = new ArrayList<OutcomeOdd>();
 
 		this.bet.addOutcome(this);
 	}
 
-	public void addOdds(OutcomeOdd outcomeOdd) {
+	public void addOdd(OutcomeOdd outcomeOdd) {
 		this.outcomeOdds.add(outcomeOdd);
 	}
 

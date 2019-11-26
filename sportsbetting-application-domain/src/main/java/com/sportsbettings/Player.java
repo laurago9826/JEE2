@@ -3,7 +3,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Player extends User {
-	public Player(PlayerBuilder pb) {
+
+	private String name;
+	private Integer accountNumber;
+	private BigDecimal balance;
+	private LocalDate birth;
+	private Currency currency;
+
+	private Player(PlayerBuilder pb) {
 		super(pb.email, pb.password);
 		this.accountNumber = pb.accountNumber;
 		this.balance = pb.balance;
@@ -12,11 +19,6 @@ public class Player extends User {
 		this.name = pb.name;
 	}
 
-	String name;
-	Integer accountNumber;
-	BigDecimal balance;
-	LocalDate birth;
-	Currency currency;
 
 	public BigDecimal getBalance() {
 		return balance;

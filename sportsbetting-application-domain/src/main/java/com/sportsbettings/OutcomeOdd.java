@@ -4,20 +4,20 @@ import java.time.LocalDateTime;
 
 public class OutcomeOdd {
 
-	BigDecimal oddValue;
-	LocalDateTime validFrom;
-	LocalDateTime validUntil;
-	Currency currency;
-	Outcome outcome;
+	private BigDecimal oddValue;
+	private LocalDateTime validFrom;
+	private LocalDateTime validUntil;
+	private Currency currency;
+	private Outcome outcome;
 
-	public OutcomeOdd(OutcomeOddBuilder oob) {
+	private OutcomeOdd(OutcomeOddBuilder oob) {
 		this.currency = oob.currency;
 		this.oddValue = oob.oddValue;
 		this.outcome = oob.outcome;
 		this.validFrom = oob.validFrom;
 		this.validUntil = oob.validUntil;
 
-		this.outcome.addOdds(this);
+		this.outcome.addOdd(this);
 	}
 
 	public BigDecimal getOddValue() {

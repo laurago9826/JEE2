@@ -30,7 +30,7 @@ public class App {
 
 	private void createPlayer() {
 		try {
-			service.SavePlayer(view.readPlayerData());
+			service.savePlayer(view.readPlayerData());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -56,7 +56,7 @@ public class App {
 				}
 				Wager wager = WagerBuilder.newInstance().setAmount(amount).setCurrency(curr.getCurrency()).setOdd(odd)
 						.setPlayer(curr).build();
-				service.SaveWager(wager);
+				service.saveWager(wager);
 				view.printWagerSaved(wager);
 				view.printBalance(curr);
 			}
@@ -66,7 +66,7 @@ public class App {
 	}
 
 	private void calculateResults() {
-		service.CalculateResults();
+		service.calculateResults();
 	}
 
 	private void printResults() {

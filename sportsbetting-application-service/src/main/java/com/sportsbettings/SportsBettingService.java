@@ -16,23 +16,20 @@ import com.sportsbettings.SportEvent.SportEventBuilder;
 
 public class SportsBettingService implements ISportsBettingService {
 
-	List<Player> players;
-	List<SportEvent> events;
-	List<Wager> wagers;
+	List<Player> players = new ArrayList<Player>();
+	List<SportEvent> events = new ArrayList<SportEvent>();
+	List<Wager> wagers = new ArrayList<Wager>();
 
 	private static Logger LOGGER = LoggerFactory.getLogger(SportsBettingService.class);
 
 	public SportsBettingService() {
-		players = new ArrayList<>();
-		events = new ArrayList<>();
-		wagers = new ArrayList<>();
 
 		createTestData();
 	}
 
-	public void SavePlayer(Player player) {
+	public void savePlayer(Player player) {
 		players.add(player);
-		LOGGER.info("Player " + player.name + " saved.");
+		LOGGER.info("Player " + player.getName() + " saved.");
 	}
 
 	public Player findPlayer() {
@@ -43,7 +40,7 @@ public class SportsBettingService implements ISportsBettingService {
 		return events;
 	}
 
-	public void SaveWager(Wager wager) {
+	public void saveWager(Wager wager) {
 		wagers.add(wager);
 		wager.getPlayer().decreaseBalance(wager.getAmount());
 	}
@@ -52,7 +49,7 @@ public class SportsBettingService implements ISportsBettingService {
 		return wagers;
 	}
 
-	public void CalculateResults() {
+	public void calculateResults() {
 		for (Outcome oc : selectWinnerOutcomes()) {
 			findAllWagers().stream().forEach(x -> {
 				OutcomeOdd odd = calcCorrectOdd(oc, x);

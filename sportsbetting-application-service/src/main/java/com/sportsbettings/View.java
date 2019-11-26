@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ import com.sportsbettings.Player.PlayerBuilder;
 public class View implements IView {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(View.class);
-	
+
 	@Autowired
 	private MessageSource messageSource;
 
@@ -27,10 +28,11 @@ public class View implements IView {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("What is your name?\n");
 		String name = reader.readLine();
-		System.out.print("What do you wish to be your initial balance?\n");
-		BigDecimal balance = new BigDecimal(reader.readLine());
+		name = name.isEmpty() ? "[Player]" : name;
+		System.out.print(messageSource.getMessage("balanceQuestion", null, Locale.ENGLISH));
+		BigDecimal balance = new BigDecimal(reader.readLine()).max(new BigDecimal(0));
 		System.out.print("What is the currency of your account? (EUR/HUF/USD)\n");
-		Currency currency = Currency.valueOf(reader.readLine());
+		Currency currency = Currency.valueOf(reader.readLine().toUpperCase());
 		return PlayerBuilder.newInstance().setName(name).setBalance(balance).setCurrency(currency).build();
 	}
 
@@ -100,10 +102,11 @@ public class View implements IView {
 	public BigDecimal readWagerAmount() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("What amount do you wish to bet?\n");
-		return new BigDecimal(reader.readLine());
+		return new BigDecimal(reader.readLine()).max(new BigDecimal(0));
 		
 	}
 
+	@Override
 	public void printWagerSaved(Wager wager) {
 		StringBuilder s = new StringBuilder("Wager: ");
 		s.append(wager.getOdd().getOutcome().getBet().getDescription()).append(" of ")

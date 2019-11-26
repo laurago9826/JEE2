@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bet {
-	String description;
-	BetType betType;
-	SportEvent sportEvent;
-	List<Outcome> outcomes;
+	private String description;
+	private BetType betType;
+	private SportEvent sportEvent;
+	private List<Outcome> outcomes = new ArrayList<Outcome>();
 
-	public Bet(BetBuilder bb) {
+	private Bet(BetBuilder bb) {
 		this.description = bb.description;
 		this.betType = bb.betType;
 		this.sportEvent = bb.sportEvent;
-		this.outcomes = new ArrayList<Outcome>();
 
 		this.sportEvent.addBet(this);
 	}
