@@ -3,19 +3,18 @@ package com.sportsbettings;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.sportsbettings.Wager.WagerBuilder;
 
 public class App {
 
+	@Autowired
 	ISportsBettingService service;
+	@Autowired
 	IView view;
 
-	public App(ISportsBettingService service, IView view) {
-		this.service = service;
-		this.view = view;
-	}
-
-
+	public App() {}
 
 	public void play() {
 		createPlayer();
