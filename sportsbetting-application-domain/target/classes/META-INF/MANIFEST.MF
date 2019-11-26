@@ -1,0 +1,44 @@
+Manifest-Version: 1.0
+Built-By: Hp Probook 440 G5
+Build-Jdk: 10.0.2
+Class-Path: spring-boot-starter-web-2.2.1.RELEASE.jar spring-boot-star
+ ter-2.2.1.RELEASE.jar spring-boot-2.2.1.RELEASE.jar spring-boot-autoc
+ onfigure-2.2.1.RELEASE.jar spring-boot-starter-logging-2.2.1.RELEASE.
+ jar logback-classic-1.2.3.jar logback-core-1.2.3.jar log4j-to-slf4j-2
+ .12.1.jar jul-to-slf4j-1.7.29.jar jakarta.annotation-api-1.3.5.jar sn
+ akeyaml-1.25.jar spring-boot-starter-json-2.2.1.RELEASE.jar jackson-d
+ atabind-2.10.0.jar jackson-annotations-2.10.0.jar jackson-core-2.10.0
+ .jar jackson-datatype-jdk8-2.10.0.jar jackson-datatype-jsr310-2.10.0.
+ jar jackson-module-parameter-names-2.10.0.jar spring-boot-starter-tom
+ cat-2.2.1.RELEASE.jar tomcat-embed-core-9.0.27.jar tomcat-embed-el-9.
+ 0.27.jar tomcat-embed-websocket-9.0.27.jar spring-boot-starter-valida
+ tion-2.2.1.RELEASE.jar jakarta.validation-api-2.0.1.jar hibernate-val
+ idator-6.0.18.Final.jar jboss-logging-3.3.2.Final.jar classmate-1.3.4
+ .jar spring-web-5.2.1.RELEASE.jar spring-webmvc-5.2.1.RELEASE.jar spr
+ ing-boot-maven-plugin-2.2.1.RELEASE.jar spring-boot-loader-tools-2.2.
+ 1.RELEASE.jar commons-compress-1.19.jar maven-archiver-3.4.0.jar mave
+ n-shared-utils-3.2.1.jar commons-io-2.5.jar plexus-interpolation-1.25
+ .jar maven-artifact-3.3.9.jar commons-lang3-3.4.jar maven-core-3.3.9.
+ jar maven-settings-builder-3.3.9.jar maven-builder-support-3.3.9.jar 
+ maven-repository-metadata-3.3.9.jar maven-model-builder-3.3.9.jar gua
+ va-18.0.jar maven-aether-provider-3.3.9.jar aether-spi-1.0.2.v2015011
+ 4.jar aether-impl-1.0.2.v20150114.jar aether-api-1.0.2.v20150114.jar 
+ aether-util-1.0.2.v20150114.jar org.eclipse.sisu.plexus-0.3.2.jar org
+ .eclipse.sisu.inject-0.3.2.jar guice-4.0-no_aop.jar javax.inject-1.ja
+ r aopalliance-1.0.jar plexus-classworlds-2.5.2.jar plexus-component-a
+ nnotations-1.6.jar plexus-sec-dispatcher-1.3.jar plexus-cipher-1.4.ja
+ r maven-model-3.3.9.jar maven-plugin-api-3.3.9.jar maven-settings-3.3
+ .9.jar maven-common-artifact-filters-3.1.0.jar sisu-inject-plexus-1.4
+ .2.jar sisu-inject-bean-1.4.2.jar sisu-guice-2.1.7-noaop.jar plexus-a
+ rchiver-3.7.0.jar plexus-io-3.1.0.jar snappy-0.4.jar xz-1.8.jar plexu
+ s-utils-3.1.0.jar plexus-build-api-0.0.7.jar spring-context-5.2.0.REL
+ EASE.jar spring-aop-5.2.0.RELEASE.jar spring-core-5.2.0.RELEASE.jar s
+ pring-jcl-5.2.0.RELEASE.jar spring-expression-5.2.0.RELEASE.jar sprin
+ g-beans-5.2.0.RELEASE.jar log4j-api-2.7.jar log4j-core-2.7.jar log4j-
+ slf4j-impl-2.7.jar slf4j-api-1.7.21.jar spring-boot-starter-thymeleaf
+ -2.2.1.RELEASE.jar thymeleaf-spring5-3.0.11.RELEASE.jar thymeleaf-3.0
+ .11.RELEASE.jar attoparser-2.0.5.RELEASE.jar unbescape-1.1.6.RELEASE.
+ jar thymeleaf-extras-java8time-3.0.4.RELEASE.jar
+Main-Class: com.sportsbettings.App
+Created-By: Maven Integration for Eclipse
+

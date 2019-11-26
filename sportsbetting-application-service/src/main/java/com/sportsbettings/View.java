@@ -26,24 +26,24 @@ public class View implements IView {
 	@Override
 	public Player readPlayerData() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("What is your name?\n");
+		System.out.print(getEnglishStringBL("nameQuestion", null));
 		String name = reader.readLine();
-		name = name.isEmpty() ? "[Player]" : name;
-		System.out.print(messageSource.getMessage("balanceQuestion", null, Locale.ENGLISH));
+		name = (name.isEmpty() ? getEnglishString("defaultPlayerName", null) : name);
+		System.out.print(getEnglishStringBL("balanceQuestion", null));
 		BigDecimal balance = new BigDecimal(reader.readLine()).max(new BigDecimal(0));
-		System.out.print("What is the currency of your account? (EUR/HUF/USD)\n");
+		System.out.print(getEnglishStringBL("currencyQuestion", null));
 		Currency currency = Currency.valueOf(reader.readLine().toUpperCase());
 		return PlayerBuilder.newInstance().setName(name).setBalance(balance).setCurrency(currency).build();
 	}
 
 	@Override
 	public void printWelcomeMessage(Player player) {
-		System.out.print("Welcome " + player.getName() + "!\n");
+		System.out.print(getEnglishStringBL("welcomeMessage", player.getName()));
 	}
 
 	@Override
 	public void printBalance(Player player) {
-		System.out.print("Your balance is " + player.getBalance() + " " + player.getCurrency() + "\n");
+		System.out.print(getEnglishStringBL("balanceCheck", player.getBalance(), player.getCurrency()));
 	}
 
 	@Override
@@ -55,13 +55,12 @@ public class View implements IView {
 				for (Outcome outcome : bet.getOutcomes()) {
 					for (OutcomeOdd odds : outcome.getOutcomeOdds()) {
 						s.setLength(0);
-						s.append(counter).append(": Sport event: ").append(event.getTitle()).append(" (start ")
-								.append(formatDate(event.getStartDate()))
-								.append("), Bet: ").append(bet.getDescription())
-								.append(", Outcome: ").append(outcome.getDescription()).append(", Actual odd: ")
-								.append(odds.getOddValue()).append(" Valid between ")
-								.append(formatDate(odds.getValidFrom())).append(" and ")
-								.append(formatDate(odds.getValidUntil())).append(".\n");
+						s.append(counter).
+								append(": ")
+								.append(getEnglishStringBL("betListItem", event.getTitle(),
+										formatDate(event.getStartDate()), outcome.getDescription(),
+										bet.getDescription(), odds.getOddValue(), formatDate(odds.getValidFrom()),
+										formatDate(odds.getValidUntil())));
 						System.out.print(s.toString());
 						counter++;
 					}
@@ -77,7 +76,7 @@ public class View implements IView {
 	@Override
 	public OutcomeOdd selectOutcomeOdd(List<SportEvent> events) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("What do you wish to bet on? (enter the number or select q)\n");
+		System.out.print(getEnglishStringBL("betQuestion", null));
 		String selection = reader.readLine();
 		if (selection.equals("q"))
 			return null;
@@ -101,39 +100,37 @@ public class View implements IView {
 	@Override
 	public BigDecimal readWagerAmount() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("What amount do you wish to bet?\n");
+		System.out.print(getEnglishStringBL("amountQuestion", null));
 		return new BigDecimal(reader.readLine()).max(new BigDecimal(0));
-		
 	}
 
 	@Override
 	public void printWagerSaved(Wager wager) {
-		StringBuilder s = new StringBuilder("Wager: ");
-		s.append(wager.getOdd().getOutcome().getBet().getDescription()).append(" of ")
-				.append(wager.getOdd().getOutcome().getBet().getSportEvent().getTitle()).append(" [ odd: ")
-				.append(wager.getOdd().getOddValue()).append(", amount: ").append(wager.getAmount())
-				.append("] saved!\n");
-		System.out.print(s.toString());
+		System.out.print(getEnglishStringBL("wagerSaved", wager.getOdd().getOutcome().getBet().getDescription(),
+				wager.getOdd().getOutcome().getBet().getSportEvent().getTitle(), wager.getOdd().getOddValue(),
+				wager.getAmount()));
 	}
 
 	@Override
 	public void printNotEnoughBalance(Player player) {
-		System.out.print("You don't have enough money on your account, your balance is " + player.getBalance() + "!\n");
+		System.out.print(getEnglishStringBL("zeroBalance", player.getBalance()));
 	}
 
 	@Override
 	public void printResults(Player player, List<Wager> wagers) {
-		StringBuilder s = new StringBuilder();
 		for (Wager w : wagers) {
-			s.setLength(0);
-			s.append("Wager '").append(w.getOdd().getOutcome().getBet().getDescription()).append("' of ")
-					.append(w.getOdd().getOutcome().getBet().getSportEvent().getTitle()).append(" [odd: ")
-					.append(w.getOdd().getOddValue()).append(", amount: ").append(w.getAmount()).append("], win: ")
-					.append(w.isWin() + "\n");
-			System.out.print(s.toString());
+			System.out.print(getEnglishStringBL("resultListItem", w.getOdd().getOutcome().getBet().getDescription(),
+					w.getOdd().getOutcome().getBet().getSportEvent().getTitle(), w.getOdd().getOddValue(),
+					w.getAmount(), w.isWin()));
 		}
-		System.out.print("Your new balance is " + player.getBalance() + " " + player.getCurrency()+"\n");
-
+		System.out.print(getEnglishStringBL("newBalance", player.getBalance(), player.getCurrency()));
 	}
 
+	private String getEnglishString(String key, Object... params) {
+		return messageSource.getMessage(key, params, Locale.ENGLISH);
+	}
+
+	private String getEnglishStringBL(String key, Object... params) {
+		return messageSource.getMessage(key, params, Locale.ENGLISH) + "\n";
+	}
 }
