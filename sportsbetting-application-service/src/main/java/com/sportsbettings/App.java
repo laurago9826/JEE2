@@ -7,7 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sportsbettings.Wager.WagerBuilder;
+import com.sportsbettings.domain.OutcomeOdd;
+import com.sportsbettings.domain.Player;
+import com.sportsbettings.domain.Wager;
+import com.sportsbettings.domain.Wager.WagerBuilder;
 
 public class App {
 
@@ -43,26 +46,31 @@ public class App {
 			view.printBalance(curr);
 			boolean exit = false;
 			while (!exit) {
-				view.printOutcomeOdds(service.findAllSportEvents());
-				OutcomeOdd odd = view.selectOutcomeOdd(service.findAllSportEvents());
-				exit = odd == null ? true : false;
-				if (exit) {
-					break;
-				}
-				BigDecimal amount = view.readWagerAmount();
-				while (amount.compareTo(curr.getBalance()) > 0) {
-					view.printNotEnoughBalance(curr);
-					amount = view.readWagerAmount();
-				}
-				Wager wager = WagerBuilder.newInstance().setAmount(amount).setCurrency(curr.getCurrency()).setOdd(odd)
-						.setPlayer(curr).build();
-				service.saveWager(wager);
-				view.printWagerSaved(wager);
-				view.printBalance(curr);
+				exit = doTheActualBetting(curr);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private boolean doTheActualBetting(Player curr) throws IOException {
+		view.printOutcomeOdds(service.findAllSportEvents());
+		OutcomeOdd odd = view.selectOutcomeOdd(service.findAllSportEvents());
+		boolean exit = odd == null || curr.getBalance().intValue() < 1 ? true : false;
+		if (exit) {
+			return true;
+		}
+		BigDecimal amount = view.readWagerAmount();
+		while (amount.compareTo(curr.getBalance()) > 0) {
+			view.printNotEnoughBalance(curr);
+			amount = view.readWagerAmount();
+		}
+		Wager wager = WagerBuilder.newInstance().setAmount(amount).setCurrency(curr.getCurrency()).setOdd(odd)
+				.setPlayer(curr).build();
+		service.saveWager(wager);
+		view.printWagerSaved(wager);
+		view.printBalance(curr);
+		return exit;
 	}
 
 	private void calculateResults() {

@@ -14,7 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
-import com.sportsbettings.Player.PlayerBuilder;
+import com.sportsbettings.domain.Bet;
+import com.sportsbettings.domain.Currency;
+import com.sportsbettings.domain.Outcome;
+import com.sportsbettings.domain.OutcomeOdd;
+import com.sportsbettings.domain.Player;
+import com.sportsbettings.domain.SportEvent;
+import com.sportsbettings.domain.Wager;
+import com.sportsbettings.domain.Player.PlayerBuilder;
 
 public class View implements IView {
 

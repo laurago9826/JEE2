@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.sportsbettings.domain.OutcomeOdd;
+import com.sportsbettings.domain.Player;
+import com.sportsbettings.domain.SportEvent;
+import com.sportsbettings.domain.Wager;
+
 public interface IView {
 
 	Player readPlayerData() throws IOException;

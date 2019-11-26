@@ -9,20 +9,31 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sportsbettings.Bet.BetBuilder;
-import com.sportsbettings.Outcome.OutcomeBuilder;
-import com.sportsbettings.OutcomeOdd.OutcomeOddBuilder;
-import com.sportsbettings.SportEvent.SportEventBuilder;
+import com.sportsbettings.domain.Bet;
+import com.sportsbettings.domain.BetType;
+import com.sportsbettings.domain.Currency;
+import com.sportsbettings.domain.Outcome;
+import com.sportsbettings.domain.OutcomeOdd;
+import com.sportsbettings.domain.Player;
+import com.sportsbettings.domain.SportEvent;
+import com.sportsbettings.domain.Wager;
+import com.sportsbettings.domain.Bet.BetBuilder;
+import com.sportsbettings.domain.Outcome.OutcomeBuilder;
+import com.sportsbettings.domain.OutcomeOdd.OutcomeOddBuilder;
+import com.sportsbettings.domain.SportEvent.SportEventBuilder;
 
 public class SportsBettingService implements ISportsBettingService {
 
-	List<Player> players = new ArrayList<Player>();
-	List<SportEvent> events = new ArrayList<SportEvent>();
-	List<Wager> wagers = new ArrayList<Wager>();
+	List<Player> players;
+	List<SportEvent> events;
+	List<Wager> wagers;
 
 	private static Logger LOGGER = LoggerFactory.getLogger(SportsBettingService.class);
 
 	public SportsBettingService() {
+		players = new ArrayList<>();
+		events = new ArrayList<>();
+		wagers = new ArrayList<>();
 
 		createTestData();
 	}
