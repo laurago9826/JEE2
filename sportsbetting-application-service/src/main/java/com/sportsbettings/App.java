@@ -3,6 +3,8 @@ package com.sportsbettings;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sportsbettings.Wager.WagerBuilder;
@@ -14,7 +16,10 @@ public class App {
 	@Autowired
 	IView view;
 
-	public App() {}
+	private static Logger LOGGER = LoggerFactory.getLogger(App.class);
+
+	public App() {
+	}
 
 	public void play() {
 		createPlayer();

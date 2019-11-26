@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.sportsbettings.Bet.BetBuilder;
 import com.sportsbettings.Outcome.OutcomeBuilder;
 import com.sportsbettings.OutcomeOdd.OutcomeOddBuilder;
@@ -17,6 +20,8 @@ public class SportsBettingService implements ISportsBettingService {
 	List<SportEvent> events;
 	List<Wager> wagers;
 
+	private static Logger LOGGER = LoggerFactory.getLogger(SportsBettingService.class);
+
 	public SportsBettingService() {
 		players = new ArrayList<>();
 		events = new ArrayList<>();
@@ -27,6 +32,7 @@ public class SportsBettingService implements ISportsBettingService {
 
 	public void SavePlayer(Player player) {
 		players.add(player);
+		LOGGER.info("Player " + player.name + " saved.");
 	}
 
 	public Player findPlayer() {

@@ -8,9 +8,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+
 import com.sportsbettings.Player.PlayerBuilder;
 
 public class View implements IView {
+
+	private static Logger LOGGER = LoggerFactory.getLogger(View.class);
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	@Override
 	public Player readPlayerData() throws IOException {
