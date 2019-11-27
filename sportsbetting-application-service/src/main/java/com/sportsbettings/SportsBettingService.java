@@ -8,25 +8,30 @@ import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sportsbettings.domain.Bet;
+import com.sportsbettings.domain.Bet.BetBuilder;
 import com.sportsbettings.domain.BetType;
 import com.sportsbettings.domain.Currency;
 import com.sportsbettings.domain.Outcome;
+import com.sportsbettings.domain.Outcome.OutcomeBuilder;
 import com.sportsbettings.domain.OutcomeOdd;
+import com.sportsbettings.domain.OutcomeOdd.OutcomeOddBuilder;
 import com.sportsbettings.domain.Player;
 import com.sportsbettings.domain.SportEvent;
-import com.sportsbettings.domain.Wager;
-import com.sportsbettings.domain.Bet.BetBuilder;
-import com.sportsbettings.domain.Outcome.OutcomeBuilder;
-import com.sportsbettings.domain.OutcomeOdd.OutcomeOddBuilder;
 import com.sportsbettings.domain.SportEvent.SportEventBuilder;
+import com.sportsbettings.domain.Wager;
+import com.sportsbettings.repository.PlayerRepository;
 
 public class SportsBettingService implements ISportsBettingService {
 
 	List<Player> players;
 	List<SportEvent> events;
 	List<Wager> wagers;
+
+	@Autowired
+	private PlayerRepository playerRepository;
 
 	private static Logger LOGGER = LoggerFactory.getLogger(SportsBettingService.class);
 
@@ -40,6 +45,8 @@ public class SportsBettingService implements ISportsBettingService {
 
 	public void savePlayer(Player player) {
 		players.add(player);
+//		SportsBettingRepository<Player> repoTest = new SportsBettingRepository<Player>(Player.class);
+		playerRepository.save(player);
 		LOGGER.info("Player " + player.getName() + " saved.");
 	}
 

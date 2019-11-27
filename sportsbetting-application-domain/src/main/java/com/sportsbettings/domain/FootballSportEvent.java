@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sport_events")
+@Table(name = "sport_event")
 public class FootballSportEvent extends SportEvent {
 
 	@Id

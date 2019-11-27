@@ -6,12 +6,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sport_events")
+@Table(name = "sport_event")
 public class TennisSportEvent extends SportEvent {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
 
 	protected TennisSportEvent(SportEventBuilder builder) {
 		super(builder);

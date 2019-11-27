@@ -7,25 +7,38 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "wagers")
+@Table(name = "wager")
 public class Wager implements Serializable {
 	
 	private static final long serialVersionUID = 6770402686662447825L;
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
 
 	private BigDecimal amount;
+
 	private LocalDateTime timestampCreated;
+
 	private boolean processed;
+
 	private boolean win;
+
+	@OneToOne
+	@JoinColumn(name = "odd_id", referencedColumnName = "id")
 	private OutcomeOdd odd;
+
 	private Currency currency;
+
+	@OneToOne
+	@JoinColumn(name = "player_id", referencedColumnName = "id")
 	private Player player;
+
 
 	private Wager(WagerBuilder wb) {
 		this.amount = wb.amount;

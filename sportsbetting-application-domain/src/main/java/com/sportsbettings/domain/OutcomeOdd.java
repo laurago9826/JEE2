@@ -2,22 +2,33 @@ package com.sportsbettings.domain;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "outcome_odds")
+@Table(name = "outcome_odd")
 public class OutcomeOdd {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
+
 	private BigDecimal oddValue;
+
 	private LocalDateTime validFrom;
+
 	private LocalDateTime validUntil;
+
 	private Currency currency;
+
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "outcome_id", referencedColumnName = "id")
 	private Outcome outcome;
 
 	private OutcomeOdd(OutcomeOddBuilder oob) {

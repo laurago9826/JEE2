@@ -3,21 +3,37 @@ package com.sportsbettings.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
-@Table(name = "outcomes")
+@Table(name = "outcome")
 public class Outcome {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
+
 	private String description;
+
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "bet_id", referencedColumnName = "id")
 	private Bet bet;
+
+	@OneToMany(mappedBy = "outcome", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<OutcomeOdd> outcomeOdds = new ArrayList<OutcomeOdd>();
+
 
 	private Outcome(OutcomeBuilder ob) {
 		this.description = ob.description;

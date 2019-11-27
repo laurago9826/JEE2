@@ -30,10 +30,15 @@ public class AppSpring {
 	private static void testJpa(ApplicationContext appContext) {
 		EntityManagerFactory emf = appContext.getBean(EntityManagerFactory.class);
 		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
 
 		Wager wager = WagerBuilder.newInstance().setAmount(new BigDecimal(35)).build();
 		User user = new User("blabla@gmail.com", "blabla");
 
 		em.persist(user);
+		em.getTransaction().commit();
+
+		em.close();
+		emf.close();
 	}
 }

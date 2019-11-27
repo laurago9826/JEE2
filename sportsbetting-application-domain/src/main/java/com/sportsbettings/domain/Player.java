@@ -6,13 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "players")
+@Table(name = "player")
 public class Player extends User {
 
 	private String name;
+
 	private Integer accountNumber;
+
 	private BigDecimal balance;
+
 	private LocalDate birth;
+
 	private Currency currency;
 
 	private Player(PlayerBuilder pb) {
