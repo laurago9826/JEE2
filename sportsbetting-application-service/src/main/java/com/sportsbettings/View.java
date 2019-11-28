@@ -19,9 +19,9 @@ import com.sportsbettings.domain.Currency;
 import com.sportsbettings.domain.Outcome;
 import com.sportsbettings.domain.OutcomeOdd;
 import com.sportsbettings.domain.Player;
+import com.sportsbettings.domain.Player.PlayerBuilder;
 import com.sportsbettings.domain.SportEvent;
 import com.sportsbettings.domain.Wager;
-import com.sportsbettings.domain.Player.PlayerBuilder;
 
 public class View implements IView {
 
@@ -55,6 +55,8 @@ public class View implements IView {
 
 	@Override
 	public void printOutcomeOdds(List<SportEvent> events) {
+		List<Bet> bets = events.get(0).getBets();
+		// List<Outcome> betss = events.get(0).getBets().get(0).getOutcomes();
 		StringBuilder s = new StringBuilder();
 		int counter = 1;
 		for (SportEvent event : events) {
@@ -83,7 +85,7 @@ public class View implements IView {
 	@Override
 	public OutcomeOdd selectOutcomeOdd(List<SportEvent> events) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print(getEnglishStringBL("betQuestion", null));
+		System.out.print(getEnglishStringBLp("betQuestion", null));
 		String selection = reader.readLine();
 		if (selection.equals("q"))
 			return null;
@@ -107,7 +109,7 @@ public class View implements IView {
 	@Override
 	public BigDecimal readWagerAmount() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print(getEnglishStringBL("amountQuestion", null));
+		System.out.print(getEnglishStringBLp("amountQuestion", null));
 		return new BigDecimal(reader.readLine()).max(new BigDecimal(0));
 	}
 
@@ -120,7 +122,7 @@ public class View implements IView {
 
 	@Override
 	public void printNotEnoughBalance(Player player) {
-		System.out.print(getEnglishStringBL("zeroBalance", player.getBalance()));
+		System.out.print(getEnglishStringBLp("zeroBalance", player.getBalance()));
 	}
 
 	@Override
@@ -139,5 +141,9 @@ public class View implements IView {
 
 	private String getEnglishStringBL(String key, Object... params) {
 		return messageSource.getMessage(key, params, Locale.ENGLISH) + "\n";
+	}
+
+	private String getEnglishStringBLp(String key, Object param) {
+		return messageSource.getMessage(key, new Object[] { param }, Locale.ENGLISH) + "\n";
 	}
 }

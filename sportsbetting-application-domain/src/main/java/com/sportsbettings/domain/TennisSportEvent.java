@@ -13,6 +13,11 @@ public class TennisSportEvent extends SportEvent {
 	@GeneratedValue
 	private int id;
 
+	private TennisSportEvent() {
+		super();
+		// hibernate
+	}
+
 	protected TennisSportEvent(SportEventBuilder builder) {
 		super(builder);
 	}

@@ -19,4 +19,6 @@ public interface ISportsBettingService {
 	List<Wager> findAllWagers();
 
 	void calculateResults();
+
+	void createTestData();
 }

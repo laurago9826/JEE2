@@ -26,7 +26,7 @@ public class Outcome {
 
 	private String description;
 
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "bet_id", referencedColumnName = "id")
 	private Bet bet;
 
@@ -40,6 +40,10 @@ public class Outcome {
 		this.bet = ob.bet;
 
 		this.bet.addOutcome(this);
+	}
+
+	private Outcome() {
+		// hibernate
 	}
 
 	public void addOdd(OutcomeOdd outcomeOdd) {

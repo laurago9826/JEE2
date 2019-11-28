@@ -28,7 +28,7 @@ public class Bet {
 
 	private BetType betType;
 
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "event_id", referencedColumnName = "id")
 	private SportEvent sportEvent;
 
@@ -36,6 +36,10 @@ public class Bet {
 	@OneToMany(mappedBy = "bet", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Outcome> outcomes = new ArrayList<Outcome>();
+
+	private Bet() {
+		// hibernate
+	}
 
 	private Bet(BetBuilder bb) {
 		this.description = bb.description;

@@ -27,7 +27,7 @@ public class OutcomeOdd {
 
 	private Currency currency;
 
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "outcome_id", referencedColumnName = "id")
 	private Outcome outcome;
 
@@ -39,6 +39,10 @@ public class OutcomeOdd {
 		this.validUntil = oob.validUntil;
 
 		this.outcome.addOdd(this);
+	}
+
+	private OutcomeOdd() {
+		// hibernate
 	}
 
 	public BigDecimal getOddValue() {
@@ -55,6 +59,13 @@ public class OutcomeOdd {
 
 	public Outcome getOutcome() {
 		return outcome;
+	}
+
+	@Override
+	public boolean equals(Object arg0) {
+		if (arg0 instanceof OutcomeOdd)
+			return this.id == ((OutcomeOdd) arg0).id;
+		return false;
 	}
 
 	// ---BUILDER---

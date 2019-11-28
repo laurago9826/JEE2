@@ -28,6 +28,11 @@ public class Player extends User {
 		this.name = pb.name;
 	}
 
+	private Player() {
+		super();
+		// for hibernate
+	}
+
 
 	public BigDecimal getBalance() {
 		return balance;

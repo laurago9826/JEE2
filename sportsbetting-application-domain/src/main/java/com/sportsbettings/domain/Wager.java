@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,13 +31,13 @@ public class Wager implements Serializable {
 
 	private boolean win;
 
-	@OneToOne
-	@JoinColumn(name = "odd_id", referencedColumnName = "id")
+	@ManyToOne
+	@JoinColumn(name = "odd_id")
 	private OutcomeOdd odd;
 
 	private Currency currency;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "player_id", referencedColumnName = "id")
 	private Player player;
 
@@ -48,6 +50,10 @@ public class Wager implements Serializable {
 		this.processed = false;
 		this.timestampCreated = LocalDateTime.now();
 		this.win = false;
+	}
+
+	private Wager() {
+		// hibernate
 	}
 
 	public OutcomeOdd getOdd() {

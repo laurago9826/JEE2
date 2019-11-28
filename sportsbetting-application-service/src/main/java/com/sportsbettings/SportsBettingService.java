@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.collect.Lists;
 import com.sportsbettings.domain.Bet;
 import com.sportsbettings.domain.Bet.BetBuilder;
 import com.sportsbettings.domain.BetType;
@@ -19,64 +20,74 @@ import com.sportsbettings.domain.Outcome.OutcomeBuilder;
 import com.sportsbettings.domain.OutcomeOdd;
 import com.sportsbettings.domain.OutcomeOdd.OutcomeOddBuilder;
 import com.sportsbettings.domain.Player;
+import com.sportsbettings.domain.Result;
 import com.sportsbettings.domain.SportEvent;
 import com.sportsbettings.domain.SportEvent.SportEventBuilder;
 import com.sportsbettings.domain.Wager;
 import com.sportsbettings.repository.PlayerRepository;
+import com.sportsbettings.repository.ResultRepository;
+import com.sportsbettings.repository.SportEventRepository;
+import com.sportsbettings.repository.WagerRepository;
 
 public class SportsBettingService implements ISportsBettingService {
-
-	List<Player> players;
-	List<SportEvent> events;
-	List<Wager> wagers;
 
 	@Autowired
 	private PlayerRepository playerRepository;
 
+	@Autowired
+	private ResultRepository resultRepository;
+
+	@Autowired
+	private SportEventRepository sportEventRepository;
+
+	@Autowired
+	private WagerRepository wagerRepository;
+
 	private static Logger LOGGER = LoggerFactory.getLogger(SportsBettingService.class);
 
 	public SportsBettingService() {
-		players = new ArrayList<>();
-		events = new ArrayList<>();
-		wagers = new ArrayList<>();
-
-		createTestData();
 	}
 
 	public void savePlayer(Player player) {
-		players.add(player);
-//		SportsBettingRepository<Player> repoTest = new SportsBettingRepository<Player>(Player.class);
 		playerRepository.save(player);
 		LOGGER.info("Player " + player.getName() + " saved.");
 	}
 
 	public Player findPlayer() {
-		return players.stream().findFirst().get();
+		return playerRepository.findById(1).get();
 	}
 
 	public List<SportEvent> findAllSportEvents() {
-		return events;
+		return Lists.newArrayList(sportEventRepository.findAll());
 	}
 
 	public void saveWager(Wager wager) {
-		wagers.add(wager);
 		wager.getPlayer().decreaseBalance(wager.getAmount());
+		wagerRepository.save(wager);
+		playerRepository.save(wager.getPlayer()); // update player balance
+
 	}
 
 	public List<Wager> findAllWagers() {
-		return wagers;
+		return Lists.newArrayList(wagerRepository.findAll());
 	}
 
 	public void calculateResults() {
-		for (Outcome oc : selectWinnerOutcomes()) {
+		Result result = new Result();
+		List<Outcome> win_outcomes = selectWinnerOutcomes();
+		for (Outcome oc : win_outcomes) {
 			findAllWagers().stream().forEach(x -> {
 				OutcomeOdd odd = calcCorrectOdd(oc, x);
-				if (x.getOdd().equals(odd)) {
+				if (odd != null && x.getOdd().equals(odd)) {
 					x.setWin(true);
+					result.addWinnerOutcome(oc);
 					x.getPlayer().increaseBalance(x.getAmount().multiply(odd.getOddValue()));
+					playerRepository.save(x.getPlayer()); // update player balance
+					wagerRepository.save(x);
 				}
 			});
 		}
+		resultRepository.save(result);
 	}
 
 	private OutcomeOdd calcCorrectOdd(Outcome oc, Wager wager) {
@@ -109,7 +120,6 @@ public class SportsBettingService implements ISportsBettingService {
 			SportEvent event = SportEventBuilder.newInstance().setTitle("bet1")
 					.setStartDate(LocalDateTime.of(2019, 3, 26, 15, 15)).setEndDate(LocalDateTime.of(2019, 3, 26, 15, 15))
 					.buildTennisEvent();
-			events.add(event);
 			Bet bet1 = BetBuilder.newInstance().setBetType(BetType.GOALS).setDescription("desc")
 					.setSportEvent(event)
 					.build();
@@ -127,12 +137,12 @@ public class SportsBettingService implements ISportsBettingService {
 					.build();
 			OutcomeOdd odd1 = OutcomeOddBuilder.newInstance().setOddValue(new BigDecimal("3.0")).setCurrency(Currency.EUR)
 				.setValidFrom(LocalDateTime.of(2019, 9, 26, 15, 15))
-				.setValidUntil(LocalDateTime.of(2019, 10, 26, 15, 15))
+				.setValidUntil(LocalDateTime.of(2019, 12, 26, 15, 15))
 					.setOutcome(outcome1)
 					.build();
 		OutcomeOdd odd2 = OutcomeOddBuilder.newInstance().setOddValue(new BigDecimal("4.0")).setCurrency(Currency.EUR)
 				.setValidFrom(LocalDateTime.of(2019, 9, 26, 15, 15))
-				.setValidUntil(LocalDateTime.of(2019, 10, 26, 15, 15))
+				.setValidUntil(LocalDateTime.of(2019, 12, 26, 15, 15))
 					.setOutcome(outcome2)
 					.build();
 		OutcomeOdd odd3 = OutcomeOddBuilder.newInstance().setOddValue(new BigDecimal("2.0")).setCurrency(Currency.EUR)
@@ -142,8 +152,9 @@ public class SportsBettingService implements ISportsBettingService {
 					.build();
 		OutcomeOdd odd4 = OutcomeOddBuilder.newInstance().setOddValue(new BigDecimal("5.0")).setCurrency(Currency.EUR)
 				.setValidFrom(LocalDateTime.of(2019, 9, 26, 15, 15))
-				.setValidUntil(LocalDateTime.of(2019, 10, 26, 15, 15))
+				.setValidUntil(LocalDateTime.of(2019, 12, 26, 15, 15))
 					.setOutcome(outcome3)
 					.build();
+		sportEventRepository.save(event);
 	}
 }

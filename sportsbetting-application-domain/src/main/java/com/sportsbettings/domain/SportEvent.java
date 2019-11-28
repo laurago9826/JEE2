@@ -13,9 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 @Entity
 @Table(name = "sport_event")
 public abstract class SportEvent {
@@ -31,10 +28,10 @@ public abstract class SportEvent {
 	private LocalDateTime endDate;
 
 	@OneToMany(mappedBy = "sportEvent", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@Fetch(value = FetchMode.SUBSELECT)
+	// @Fetch(value = FetchMode.SUBSELECT)
 	private List<Bet> bets = new ArrayList<Bet>();
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "result_id", referencedColumnName = "id")
 	private Result result;
 
@@ -44,6 +41,10 @@ public abstract class SportEvent {
 		this.startDate = seb.startDate;
 		this.endDate = seb.endDate;
 		this.result = seb.result;
+	}
+
+	protected SportEvent() {
+		// hibernate
 	}
 
 	public void addBet(Bet bet) {

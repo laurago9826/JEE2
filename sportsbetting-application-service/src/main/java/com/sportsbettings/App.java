@@ -26,6 +26,7 @@ public class App {
 
 	public void play() {
 		createPlayer();
+		service.createTestData();
 		doBettings();
 		calculateResults();
 		printResults();
@@ -35,7 +36,7 @@ public class App {
 		try {
 			service.savePlayer(view.readPlayerData());
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getLocalizedMessage());
 		}
 	}
 
