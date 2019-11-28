@@ -2,183 +2,373 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.sportsbettings</groupId>
+
 	<artifactId>sportsbetting-application-maven</artifactId>
+
 	<version>1.0-SNAPSHOT</version>
+
 	<packaging>pom</packaging>
 
 	<name>sportsbetting-application-maven</name>
+
 	<!-- FIXME change it to the project's website -->
+
 	<url>http://www.example.com</url>
 
 	<properties>
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
 		<maven.compiler.source>10</maven.compiler.source>
+
 		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+
 	</properties>
 
 	<dependencies>
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
+
 		<dependency>
+
 			<groupId>org.springframework.boot</groupId>
+
 			<artifactId>spring-boot-starter-parent</artifactId>
+
 			<version>2.2.1.RELEASE</version>
+
 			<type>pom</type>
+
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.2.1.RELEASE</version>
-		</dependency>
+
+<!-- 		<dependency> -->
+
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+
+<!-- 			<artifactId>spring-boot-starter-web</artifactId> -->
+
+<!-- 			<version>2.2.1.RELEASE</version> -->
+
+<!-- 		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
+
 		<dependency>
+
 			<groupId>org.springframework.boot</groupId>
+
 			<artifactId>spring-boot-maven-plugin</artifactId>
+
 			<version>2.2.1.RELEASE</version>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>org.springframework</groupId>
+
 			<artifactId>spring-context</artifactId>
+
 			<version>5.2.0.RELEASE</version>
+
 			<exclusions>
+
 				<exclusion>
+
 					<groupId>commons-logging</groupId>
+
 					<artifactId>commons-logging</artifactId>
+
 				</exclusion>
+
 			</exclusions>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>org.springframework</groupId>
+
 			<artifactId>spring-beans</artifactId>
+
 			<version>5.2.0.RELEASE</version>
+
 		</dependency>
 
 		<dependency>
+
 			<groupId>junit</groupId>
+
 			<artifactId>junit</artifactId>
+
 			<version>4.11</version>
+
 			<scope>test</scope>
+
 		</dependency>
 
 		<dependency>
+
 			<groupId>org.apache.logging.log4j</groupId>
+
 			<artifactId>log4j-api</artifactId>
+
 			<version>2.7</version>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>org.apache.logging.log4j</groupId>
+
 			<artifactId>log4j-core</artifactId>
+
 			<version>2.7</version>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>org.apache.logging.log4j</groupId>
+
 			<artifactId>log4j-slf4j-impl</artifactId>
+
 			<version>2.7</version>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>org.springframework.boot</groupId>
+
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+
 			<version>2.2.1.RELEASE</version>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>org.springframework.boot</groupId>
+
 			<artifactId>spring-boot-starter</artifactId>
+
 			<version>2.2.1.RELEASE</version>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>org.springframework.boot</groupId>
+
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+
 			<version>2.2.1.RELEASE</version>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>com.h2database</groupId>
+
 			<artifactId>h2</artifactId>
+
 			<version>1.4.200</version>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>org.hibernate</groupId>
+
 			<artifactId>hibernate-entitymanager</artifactId>
+
 			<version>5.4.9.Final</version>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>mysql</groupId>
+
 			<artifactId>mysql-connector-java</artifactId>
+
 			<version>8.0.18</version>
+
 		</dependency>
+
 		<dependency>
+
 			<groupId>org.hibernate</groupId>
+
 			<artifactId>hibernate-core</artifactId>
+
 			<version>5.4.9.Final</version>
+
 		</dependency>
+ 		<dependency>
+ 			<groupId>javax.servlet</groupId>
+ 			<artifactId>servlet-api</artifactId>
+ 			<version>2.5</version>
+ 			<scope>provided</scope>
+ 		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.tomcat</groupId> -->
+<!-- 			<artifactId>tomcat-catalina</artifactId> -->
+<!-- 			<version>7.0.96</version> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
+<!--         <dependency> -->
+<!--             <groupId>org.springframework</groupId> -->
+<!--             <artifactId>spring-web</artifactId> -->
+<!--             <version>5.2.0.RELEASE</version> -->
+<!--         </dependency> -->
 
 	</dependencies>
 
 	<build>
+
 		<pluginManagement>
+
 			<!-- lock down plugins versions to avoid using Maven defaults (may be 
 				moved to parent pom) -->
+
 			<plugins>
+
 				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+
 				<plugin>
+
 					<artifactId>maven-clean-plugin</artifactId>
+
 					<version>3.1.0</version>
+
 				</plugin>
+
 				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+
 				<plugin>
+
 					<artifactId>maven-resources-plugin</artifactId>
+
 					<version>3.0.2</version>
+
 				</plugin>
+
 				<plugin>
+
 					<artifactId>maven-compiler-plugin</artifactId>
+
 					<version>3.8.0</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
-				</plugin>
-				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-				<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>3.0.0</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
 					<configuration>
+						<source>10</source>
+						<target>10</target>
+					</configuration>
+
+				</plugin>
+
+				<plugin>
+
+					<artifactId>maven-surefire-plugin</artifactId>
+
+					<version>2.22.1</version>
+
+				</plugin>
+
+				<plugin>
+
+					<artifactId>maven-jar-plugin</artifactId>
+
+					<version>3.0.2</version>
+
+				</plugin>
+
+				<plugin>
+
+					<artifactId>maven-install-plugin</artifactId>
+
+					<version>2.5.2</version>
+
+				</plugin>
+
+				<plugin>
+
+					<artifactId>maven-deploy-plugin</artifactId>
+
+					<version>2.8.2</version>
+
+				</plugin>
+
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+
+				<plugin>
+
+					<artifactId>maven-site-plugin</artifactId>
+
+					<version>3.7.1</version>
+
+				</plugin>
+
+				<plugin>
+
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+
+					<version>3.0.0</version>
+
+				</plugin>
+
+				<plugin>
+
+					<groupId>org.apache.maven.plugins</groupId>
+
+					<artifactId>maven-jar-plugin</artifactId>
+
+					<configuration>
+
 						<archive>
+
 							<manifest>
+
 								<addClasspath>true</addClasspath>
+
 								<mainClass>com.sportsbettings.App</mainClass>
+
 							</manifest>
+
 						</archive>
+
+					</configuration>
+
+				</plugin>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+					<configuration>
+						<port>8888</port>
+						<path>/</path>
 					</configuration>
 				</plugin>
+
 			</plugins>
+
 		</pluginManagement>
+
 	</build>
+
 	<modules>
+
 		<module>sportsbetting-application-domain</module>
+
 		<module>sportsbetting-application-service</module>
+
+		<module>sportbetting-application-web</module>
 	</modules>
+
 </project>
