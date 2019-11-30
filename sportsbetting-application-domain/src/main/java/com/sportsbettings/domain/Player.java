@@ -96,6 +96,14 @@ public class Player extends User {
 		this.id = id;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Player) {
+			return ((Player) obj).getId() == this.id;
+		}
+		return false;
+	}
+
 	// ---BUILDER---
 	public static class PlayerBuilder {
 		String name;

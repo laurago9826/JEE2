@@ -58,11 +58,12 @@ public class HomeController {
 		Player player = service.findPlayer();
 		int counter = 1;
 		for (Wager w : wagers) {
-			//if (player.equals(w.getPlayer())) {
+			if (player.equals(w.getPlayer())) {
 				TableData d = new TableData();
 				d.setRemoveIsVisible(service.eventNotStarted(w));
 				d.setIndex(counter);
-				d.setEventType(w.getOdd().getOutcome().getBet().getSportEvent().getTitle());
+				d.setEventTitle(w.getOdd().getOutcome().getBet().getSportEvent().getTitle());
+				d.setEventType(w.getOdd().getOutcome().getBet().getSportEvent().getClass().getName());
 				d.setBetType(w.getOdd().getOutcome().getBet().getDescription());
 				d.setOutcome(w.getOdd().getOutcome().getDescription());
 				d.setOutcomeOdd("1:" + w.getOdd().getOddValue());
@@ -71,7 +72,7 @@ public class HomeController {
 				d.setProcessed(w.isProcessed());
 				counter++;
 				rowData.add(d);
-			// }
+			}
 		}
 		mv.addObject("tableData", rowData);
 	}

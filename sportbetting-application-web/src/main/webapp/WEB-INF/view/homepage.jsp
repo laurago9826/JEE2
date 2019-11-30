@@ -117,56 +117,53 @@
 	</div>
 
 
-
 	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">First</th>
-				<th scope="col">Last</th>
-				<th scope="col">Handle</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th scope="row">1</th>
-				<td>Mark</td>
-				<td>Otto</td>
-				<td>@mdo</td>
-			</tr>
-		</tbody>
-	</table>
-
-	<table class="table">
-		<thead class="thead-light">
-			<tr>
-				<th class="text-left"></th>
-				<th class="text-left">#</th>
-				<th class="text-left">Event title</th>
-				<th class="text-left">Event type</th>
-				<th class="text-left">Bet type</th>
-				<th class="text-left">Outcome value</th>
-				<th class="text-left">Outcome odd</th>
-				<th class="text-left">Wager amount</th>
-				<th class="text-left">Winner</th>
-				<th class="text-left">Processed</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="listItem : ${tableData}">
+		<tr>
+			<td></td>
+			<th class="text-left">#</th>
+			<th class="text-left">Event title</th>
+			<th class="text-left">Event type</th>
+			<th class="text-left">Bet type</th>
+			<th class="text-left">Outcome value</th>
+			<th class="text-left">Outcome odd</th>
+			<th class="text-left">Wager amount</th>
+			<th class="text-left">Winner</th>
+			<td class="text-left">Processed</td>
+		</tr>
+		<c:forEach var="row" items="${tableData}">
+			<tr scope="col">
 				<td>
-					<button>Remove</button>
+					<c:out value="" />
 				</td>
-				<td th:text="${listItem.index}">7.8</td>
-				<td th:text="${listItem.eventType}">LOW</td>
-				<td th:text="${listItem.betType}">Peter recommended</td>
-				<td th:text="${listItem.outcome}">7.8</td>
-				<td th:text="${listItem.outcomeOdd}">LOW</td>
-				<td th:text="${listItem.wagerAmount}">Peter recommended</td>
-				<td th:text="${listItem.isWin}">LOW</td>
-				<td th:text="${listItem.isProcessed}">Peter recommended</td>
+				<th scope="row">
+					<c:out value="${row.index}" />
+				</th>
+								<td>
+					<c:out value="${row.eventTitle}" />
+				</td>
+				<td>
+					<c:out value="${row.eventType}" />
+				</td>
+				<td>
+					<c:out value="${row.betType}" />
+				</td>
+				<td>
+					<c:out value="${row.outcome}" />
+				</td>
+				<td>
+					<c:out value="${row.outcomeOdd}" />
+				</td>
+				<td>
+					<c:out value="${row.wagerAmount}" />
+				</td>
+				<td>
+					<c:out value="${row.win}" />
+				</td>
+				<td>
+					<c:out value="${row.processed}" />
+				</td>
 			</tr>
-		</tbody>
+		</c:forEach>
 	</table>
 </body>
 </html>

@@ -25,7 +25,7 @@
 		<table>
 			<tr>
 				<td>User:</td>
-				<td><form:input path="email" /></td>
+				<td><form:input path="email" type="text"/></td>
 			</tr>
 			<tr>
 				<td>Password:</td>

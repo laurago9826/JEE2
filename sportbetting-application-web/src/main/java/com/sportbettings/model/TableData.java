@@ -4,6 +4,7 @@ public class TableData {
 
 	private boolean removeIsVisible;
 	private int index;
+	private String eventTitle;
 	private String eventType;
 	private String betType;
 	private String outcome;
@@ -82,6 +83,14 @@ public class TableData {
 
 	public void setProcessed(boolean processed) {
 		this.processed = processed;
+	}
+
+	public String getEventTitle() {
+		return eventTitle;
+	}
+
+	public void setEventTitle(String eventTitle) {
+		this.eventTitle = eventTitle;
 	}
 
 }

@@ -25,6 +25,7 @@ import com.sportsbettings.domain.Result;
 import com.sportsbettings.domain.SportEvent;
 import com.sportsbettings.domain.SportEvent.SportEventBuilder;
 import com.sportsbettings.domain.Wager;
+import com.sportsbettings.domain.Wager.WagerBuilder;
 import com.sportsbettings.repository.PlayerRepository;
 import com.sportsbettings.repository.ResultRepository;
 import com.sportsbettings.repository.SportEventRepository;
@@ -169,5 +170,17 @@ public class SportsBettingService implements ISportsBettingService {
 					.setOutcome(outcome3)
 					.build();
 		sportEventRepository.save(event);
+		Wager w = WagerBuilder.newInstance().setAmount(new BigDecimal(100)).setPlayer(currentPlayer)
+				.setCurrency(currentPlayer.getCurrency()).setOdd(odd1).build();
+		Wager w2 = WagerBuilder.newInstance().setAmount(new BigDecimal(100)).setPlayer(currentPlayer)
+				.setCurrency(currentPlayer.getCurrency()).setOdd(odd2).build();
+		Wager w3 = WagerBuilder.newInstance().setAmount(new BigDecimal(100)).setPlayer(currentPlayer)
+				.setCurrency(currentPlayer.getCurrency()).setOdd(odd3).build();
+		Wager w4 = WagerBuilder.newInstance().setAmount(new BigDecimal(100)).setPlayer(currentPlayer)
+				.setCurrency(currentPlayer.getCurrency()).setOdd(odd4).build();
+		this.saveWager(w);
+		this.saveWager(w2);
+		this.saveWager(w3);
+		this.saveWager(w4);
 	}
 }
