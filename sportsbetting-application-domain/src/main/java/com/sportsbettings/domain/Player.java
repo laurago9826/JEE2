@@ -1,13 +1,20 @@
 package com.sportsbettings.domain;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "player")
 public class Player extends User {
+
+	@Id
+	@GeneratedValue
+	private int id;
 
 	private String name;
 
@@ -33,9 +40,48 @@ public class Player extends User {
 		// for hibernate
 	}
 
+	public int getId() {
+		return id;
+	}
 
 	public BigDecimal getBalance() {
 		return balance;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public Integer getAccountNumber() {
+		return accountNumber;
+	}
+
+	public LocalDate getBirth() {
+		return birth;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setAccountNumber(Integer accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public void setBirth(LocalDate birth) {
+		this.birth = birth;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
 	}
 
 	public void increaseBalance(BigDecimal by) {
@@ -46,12 +92,8 @@ public class Player extends User {
 		this.balance = balance.subtract(by);
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public Currency getCurrency() {
-		return currency;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	// ---BUILDER---
@@ -110,5 +152,4 @@ public class Player extends User {
 			return new Player(this);
 		}
 	}
-
 }

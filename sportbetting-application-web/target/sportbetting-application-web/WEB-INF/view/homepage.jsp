@@ -4,7 +4,7 @@
 <head>
 <link href="<c:url value="/resources/css/styles.css" />"
 	rel="stylesheet">
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+<link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
 <title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

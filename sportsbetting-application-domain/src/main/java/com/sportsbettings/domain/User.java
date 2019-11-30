@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 	@Id
 	@GeneratedValue
@@ -19,12 +19,20 @@ public class User {
 
 	protected String password;
 
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
 	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
 	}
 
-	protected User() {
+	public User() {
 		// hibernate
 	}
 }

@@ -21,4 +21,8 @@ public interface ISportsBettingService {
 	void calculateResults();
 
 	void createTestData();
+
+	Player findPlayerById(int id);
+
+	boolean eventNotStarted(Wager w);
 }

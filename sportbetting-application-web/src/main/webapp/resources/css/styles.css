@@ -6,3 +6,7 @@ p{
 .test {
 	background-color: aqua;
 }
+
+.itemContainer {
+	padding: 15px;
+}

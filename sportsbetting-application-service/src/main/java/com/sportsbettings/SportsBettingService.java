@@ -9,6 +9,7 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.sportsbettings.domain.Bet;
@@ -29,6 +30,7 @@ import com.sportsbettings.repository.ResultRepository;
 import com.sportsbettings.repository.SportEventRepository;
 import com.sportsbettings.repository.WagerRepository;
 
+@Service
 public class SportsBettingService implements ISportsBettingService {
 
 	@Autowired
@@ -42,6 +44,8 @@ public class SportsBettingService implements ISportsBettingService {
 
 	@Autowired
 	private WagerRepository wagerRepository;
+	
+	private static Player currentPlayer;
 
 	private static Logger LOGGER = LoggerFactory.getLogger(SportsBettingService.class);
 
@@ -49,12 +53,16 @@ public class SportsBettingService implements ISportsBettingService {
 	}
 
 	public void savePlayer(Player player) {
+		currentPlayer = player;
 		playerRepository.save(player);
-		LOGGER.info("Player " + player.getName() + " saved.");
+	}
+
+	public Player findPlayerById(int id) {
+		return playerRepository.findById(id).get();
 	}
 
 	public Player findPlayer() {
-		return playerRepository.findById(1).get();
+		return currentPlayer;
 	}
 
 	public List<SportEvent> findAllSportEvents() {
@@ -84,6 +92,7 @@ public class SportsBettingService implements ISportsBettingService {
 					x.getPlayer().increaseBalance(x.getAmount().multiply(odd.getOddValue()));
 					playerRepository.save(x.getPlayer()); // update player balance
 					wagerRepository.save(x);
+					x.setProcessed(true);
 				}
 			});
 		}
@@ -113,6 +122,10 @@ public class SportsBettingService implements ISportsBettingService {
 			}
 		}
 		return wins;
+	}
+	
+	public boolean eventNotStarted(Wager w) {
+		return w.getOdd().getOutcome().getBet().getSportEvent().getStartDate().isAfter(LocalDateTime.now());
 	}
 
 	// ---TEST-DATA---

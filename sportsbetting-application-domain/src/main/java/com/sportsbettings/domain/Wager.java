@@ -29,6 +29,7 @@ public class Wager implements Serializable {
 
 	private boolean processed;
 
+
 	private boolean win;
 
 	@ManyToOne
@@ -78,6 +79,14 @@ public class Wager implements Serializable {
 
 	public void setWin(boolean win) {
 		this.win = win;
+	}
+
+	public boolean isProcessed() {
+		return processed;
+	}
+
+	public void setProcessed(boolean processed) {
+		this.processed = processed;
 	}
 
 	// ---BUILDER---

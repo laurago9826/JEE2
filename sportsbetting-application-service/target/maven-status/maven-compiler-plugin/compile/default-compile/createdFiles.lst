@@ -1,13 +1,8 @@
-com\sportsbettings\repository\UserRepository.class
-com\sportsbettings\repository\PlayerRepository.class
-com\sportsbettings\AppSpring.class
-com\sportsbettings\ISportsBettingService.class
-com\sportsbettings\IView.class
-com\sportsbettings\repository\ResultRepository.class
-com\sportsbettings\repository\SportEventRepository.class
-com\sportsbettings\repository\WagerRepository.class
 com\sportsbettings\View.class
 com\sportsbettings\SportsBettingService.class
+com\sportsbettings\AppSpring.class
 com\sportsbettings\config\JPAConfig.class
+com\sportsbettings\ISportsBettingService.class
+com\sportsbettings\IView.class
 com\sportsbettings\App.class
 com\sportsbettings\config\AppConfig.class
