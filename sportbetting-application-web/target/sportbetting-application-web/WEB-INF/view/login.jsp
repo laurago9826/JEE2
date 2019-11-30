@@ -11,30 +11,39 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div class="jumbotron main-text">
+	<div class="jumbotron main-container">
 		<div class="container text-container">
-			<h1 class="display-4 welcome-text">Welcome to SportsBet!</h1>
-			<p class="lead motto-text">Sport betting is the activity of
-				predicting sports results and placing a wager on the outcome!</p>
+			<h1 class="display-4 welcome-text">${welcome}</h1>
+			<p class="lead motto-text">${motto}</p>
 		</div>
 	</div>
-	
-<h1>Login</h1>
+	<div class="login-message">
+		<span class="login-message-component blue-title"> ${login} </span>
+		<span class="login-message-component"> ${orr} </span>
+		<span class="login-message-component blue-title"> ${register} </span>
+		<span class="login-message-component"> ${toStart} </span>
+	</div>
 
-	<form:form name='f' action="login" method='POST' modelAttribute="user">
-		<table>
-			<tr>
-				<td>User:</td>
-				<td><form:input path="email" type="text"/></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><form:input path="password" type="password"/></td>
-			</tr>
-			<tr>
-				<td><input name="submit" type="submit" value="Login" /></td>
-			</tr>
-		</table>
-	</form:form>
+	<div class="card border-info mb-3 login-div" style="max-width: 18rem;">
+		<div class="card-header header-item">
+			<span class="card-title"> ${login}</span>
+		</div>
+		<div class="card-body text-info">
+			<form:form name='f' action="login" method='POST'
+				modelAttribute="user">
+				<div class="form-group">
+					<form:input type="email" class="form-control"
+						placeholder="${email}" path="email" />
+				</div>
+				<div class="form-group">
+					<form:input type="password" class="form-control"
+						id="exampleInputPassword1" placeholder="${password}"
+						path="password" />
+				</div>
+				<input type="submit" class="btn btn-primary general-button"
+					value="${login}" />
+			</form:form>
+		</div>
+	</div>
 </body>
 </html>

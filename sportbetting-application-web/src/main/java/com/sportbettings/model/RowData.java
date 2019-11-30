@@ -4,7 +4,7 @@ public class RowData {
 
 	private int wagerId;
 	private boolean removeIsVisible;
-	private String textForRemoveButton;
+	private String classNameOnButton;
 	private int index;
 	private String eventTitle;
 	private String eventType;
@@ -12,8 +12,8 @@ public class RowData {
 	private String outcome;
 	private String outcomeOdd;
 	private String wagerAmount;
-	private boolean isWin;
-	private boolean processed;
+	private String isWin;
+	private String processed;
 
 
 	public boolean isRemoveIsVisible() {
@@ -44,17 +44,12 @@ public class RowData {
 		return wagerAmount;
 	}
 
-	public boolean isWin() {
+	public String getWin() {
 		return isWin;
 	}
 
-	public boolean isProcessed() {
+	public String getProcessed() {
 		return processed;
-	}
-
-	public void setRemoveIsVisible(boolean removeIsVisible) {
-		this.removeIsVisible = removeIsVisible;
-		this.textForRemoveButton = removeIsVisible ? "submit" : "hidden";
 	}
 
 	public void setIndex(int index) {
@@ -81,20 +76,16 @@ public class RowData {
 		this.wagerAmount = wagerAmount;
 	}
 
-	public void setWin(boolean isWin) {
+	public void setWin(String isWin) {
 		this.isWin = isWin;
 	}
 
-	public void setProcessed(boolean processed) {
+	public void setProcessed(String processed) {
 		this.processed = processed;
 	}
 
 	public String getEventTitle() {
 		return eventTitle;
-	}
-
-	public String getTextForRemoveButton() {
-		return textForRemoveButton;
 	}
 
 	public void setEventTitle(String eventTitle) {
@@ -108,5 +99,18 @@ public class RowData {
 	public void setWagerId(int wagerId) {
 		this.wagerId = wagerId;
 	}
+
+	public void setRemoveIsVisible(boolean removeIsVisible) {
+		this.removeIsVisible = removeIsVisible;
+	}
+
+	public String getClassNameOnButton() {
+		return classNameOnButton;
+	}
+
+	public void setClassNameOnButton(String classNameOnButton) {
+		this.classNameOnButton = classNameOnButton;
+	}
+
 }
 

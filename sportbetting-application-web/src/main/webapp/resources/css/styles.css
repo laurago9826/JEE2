@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
-.general-button {
-	background-color: #17a2b8;
-	border-color: #17a2b8;
+.general-button, .general-button:hover, .general-button:not(:disabled):not(.disabled).active,
+ .general-button:not(:disabled):not(.disabled):active
+ {
+	background-color: #17a2b8 !important;
+	border-color: #17a2b8 !important;
 }
 
 .card-header {
@@ -13,10 +15,6 @@
 	color: white !important;
 	font-weight: bold;
 	font-size: 22px;
-}
-
-.itemContainer {
-	padding: 15px;
 }
 
 .login-div {
@@ -54,4 +52,47 @@
 
 .main-container {
 	background-color: #343a40;
+}
+
+.my-header {
+	padding: 8px 20px 8px 20px;
+}
+
+.general-container {
+	padding: 15px 15px 0px 15px;
+}
+
+.input-field {
+	padding: 6px 10px 0px 10px;
+}
+
+.my-card-body {
+	padding: 0px;
+}
+
+.my-card-title {
+	font-weight: normal;
+	font-size: 17px;
+}
+
+.form-button {
+	margin: 6px 10px 6px 10px;
+}
+
+.table td, .table th{
+	padding: 6px 12px 6px 12px;
+	font-size: 15px;
+}
+
+.table {
+	margin: 0px;
+}
+
+.logout-btn, .logout-btn:hover {
+	color: white;
+	border-color: white;
+}
+
+.dropdown-item:active {
+	background-color: white;
 }

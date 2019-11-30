@@ -41,8 +41,7 @@ public class HomeController {
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public String remove(@ModelAttribute("tableData") TableData tableDat) {
 		RowData toRemove = this.tableData.getTableData().stream()
-				.filter(x -> tableDat.getRowToDelete() == x.getWagerId())
-				.findAny().get();
+				.filter(x -> tableDat.getRowToDelete() == x.getWagerId()).findAny().get();
 		List<RowData> newTable = tableData.getTableData();
 		newTable.remove(toRemove);
 		tableData.setTableData(newTable);
@@ -55,6 +54,7 @@ public class HomeController {
 		player.setId(Integer.parseInt(id));
 		service.savePlayer(player);
 		service.createTestData(); // hogy lássunk is valamit
+		service.calculateResults();
 		return "redirect:/home";
 	}
 
@@ -63,17 +63,13 @@ public class HomeController {
 		Player player = service.findPlayer();
 		ModelAndView mv = new ModelAndView("homepage", "player", player);
 		mv.addObject("id", player.getId());
-		mv.addObject("namelbl", "Name");
-		mv.addObject("dateofblbl", "Date of birth");
-		mv.addObject("accnumlbl", "Account number");
-		mv.addObject("currencylbl", "Currency");
-		mv.addObject("balancelbl", "Balance");
 		Map<String, String> curopts = new HashMap<>();
 		for (var x : Currency.values()) {
 			curopts.put(x.name(), x.name());
 		}
 		mv.addObject("curopts", curopts);
 		addTableContent(mv);
+		localizeHomePage(mv);
 		return mv;
 	}
 
@@ -88,13 +84,21 @@ public class HomeController {
 				d.setRemoveIsVisible(service.eventNotStarted(w));
 				d.setIndex(counter);
 				d.setEventTitle(w.getOdd().getOutcome().getBet().getSportEvent().getTitle());
-				d.setEventType(w.getOdd().getOutcome().getBet().getSportEvent().getClass().getName());
+				d.setEventType(
+						getEnglishStringp(w.getOdd().getOutcome().getBet().getSportEvent().getClass().getName(), null));
 				d.setBetType(w.getOdd().getOutcome().getBet().getDescription());
 				d.setOutcome(w.getOdd().getOutcome().getDescription());
-				d.setOutcomeOdd("1:" + w.getOdd().getOddValue());
-				d.setWagerAmount(w.getAmount() + " " + w.getPlayer().getCurrency());
-				d.setWin(w.isWin());
-				d.setProcessed(w.isProcessed());
+				d.setOutcomeOdd("1:" + w.getOdd().getOddValue().intValue());
+				d.setWagerAmount(w.getAmount().intValue() + " " + w.getPlayer().getCurrency());
+				if (d.isRemoveIsVisible()) {
+					d.setWin(getEnglishStringp("unknown", null));
+					d.setProcessed(getEnglishStringp("unknown", null));
+				}
+				else {
+					d.setWin(getEnglishStringp(String.valueOf(w.isWin()), null));
+					d.setProcessed(getEnglishStringp(String.valueOf(w.isProcessed()), null));
+				}
+				d.setClassNameOnButton(d.isRemoveIsVisible() ? "visible-remove" : "hide-remove");
 				d.setWagerId(w.getId());
 				counter++;
 				rowData.add(d);
@@ -105,12 +109,38 @@ public class HomeController {
 		mv.addObject("tableData", tableData);
 	}
 
-	private String getEnglishStringp(String key, Object param) {
-		return messageSource.getMessage(key, new Object[] { param }, Locale.ENGLISH);
+	private void localizeHomePage(ModelAndView mv) {
+		mv.addObject("sportsbetting", getEnglishStringp("sportsBetting", null));
+		mv.addObject("home", getEnglishStringp("home", null));
+		mv.addObject("events", getEnglishStringp("events", null));
+		mv.addObject("language", getEnglishStringp("language", null));
+		mv.addObject("english", getEnglishStringp("english", null));
+		mv.addObject("hungarian", getEnglishStringp("hungarian", null));
+		mv.addObject("playerDetails", getEnglishStringp("playerDetails", null));
+		mv.addObject("namelbl", getEnglishStringp("name", null));
+		mv.addObject("birthlbl", getEnglishStringp("birth", null));
+		mv.addObject("accountNumberlbl", getEnglishStringp("accountNumber", null));
+		mv.addObject("currency", getEnglishStringp("currency", null));
+		mv.addObject("balancelbl", getEnglishStringp("balance", null));
+		mv.addObject("save", getEnglishStringp("save", null));
+		mv.addObject("wagers", getEnglishStringp("wagers", null));
+		mv.addObject("remove", getEnglishStringp("remove", null));
+		mv.addObject("eventTitle", getEnglishStringp("eventTitle", null));
+		mv.addObject("eventType", getEnglishStringp("eventType", null));
+		mv.addObject("betType", getEnglishStringp("betType", null));
+		mv.addObject("outcomeValue", getEnglishStringp("outcomeValue", null));
+		mv.addObject("outcomeOdd", getEnglishStringp("outcomeOdd", null));
+		mv.addObject("wagerAmount", getEnglishStringp("wagerAmount", null));
+		mv.addObject("true", getEnglishStringp("true", null));
+		mv.addObject("false", getEnglishStringp("false", null));
+		mv.addObject("unknown", getEnglishStringp("unknown", null));
+		mv.addObject("logout", getEnglishStringp("logout", null));
+		mv.addObject("winner", getEnglishStringp("winner", null));
+		mv.addObject("processedd", getEnglishStringp("processed", null));
 	}
 
-	private String getEnglishString(String key, Object... params) {
-		return messageSource.getMessage(key, params, Locale.ENGLISH);
+	private String getEnglishStringp(String key, Object param) {
+		return messageSource.getMessage(key, new Object[] { param }, Locale.ENGLISH);
 	}
 
 }

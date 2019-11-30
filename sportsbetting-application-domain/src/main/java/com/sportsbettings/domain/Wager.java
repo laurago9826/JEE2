@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,7 +31,7 @@ public class Wager implements Serializable {
 
 	private boolean win;
 
-	@ManyToOne
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "odd_id")
 	private OutcomeOdd odd;
 

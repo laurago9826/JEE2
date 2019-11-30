@@ -11,7 +11,7 @@ public class FootballSportEvent extends SportEvent {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
 
 	public FootballSportEvent(SportEventBuilder builder) {
 		super(builder);

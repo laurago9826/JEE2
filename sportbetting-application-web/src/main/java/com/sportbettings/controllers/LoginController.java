@@ -57,9 +57,4 @@ public class LoginController {
 	private String getEnglishStringp(String key, Object param) {
 		return messageSource.getMessage(key, new Object[] { param }, Locale.ENGLISH);
 	}
-
-	private String getEnglishString(String key, Object... params) {
-		return messageSource.getMessage(key, params, Locale.ENGLISH);
-	}
-
 }

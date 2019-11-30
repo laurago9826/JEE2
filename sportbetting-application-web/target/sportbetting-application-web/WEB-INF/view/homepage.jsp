@@ -1,8 +1,13 @@
 <!DOCTYPE HTML>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link href="<c:url value="/resources/js/jquery.min.js" />"
+	rel="script">
+<link href="<c:url value="/resources/js/bootstrap.min.js" />"
+	rel="script">
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/styles.css" />"
@@ -43,130 +48,151 @@
 					</div>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form>
+			<form:form class="form-inline my-2 my-lg-0" action="logout"
+				method='POST'>
+				<input type="submit" class="btn btn-outline-dark my-2 my-sm-0 logout-btn"
+					type="submit" value="Logout" />
+			</form:form>
 		</div>
 	</nav>
-	<div class="itemContainer">
-		<form:form name='f' action="save" method='POST'
-			modelAttribute="player">
-			<form:hidden path="id" value="${id}" />
-			<div class="col-sm-12 my-1">
-				<label class="sr-only" for="inlineFormInputGroupUsername">
-					${namelbl} </label>
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<div class="input-group-text">${namelbl}</div>
-					</div>
-					<form:input type="text" class="form-control" path="name"
-						value="${name}"></form:input>
-				</div>
+
+	<div class="general-container">
+		<div class="card border-info mb-3 itemContainer">
+			<div class="card-header header-item my-header">
+				<span class="card-title my-card-title"> Account details </span>
 			</div>
-			<div class="col-sm-12 my-1">
-				<label class="sr-only" for="inlineFormInputGroupUsername">${dateofblbl}</label>
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<div class="input-group-text">${dateofblbl}</div>
+			<div class="card-body my-card-body">
+				<form:form name='f' action="save" method='POST'
+					modelAttribute="player">
+					<form:hidden path="id" value="${id}" />
+					<div class="col-sm-12 my-1 input-field">
+						<label class="sr-only" for="inlineFormInputGroupUsername">
+							${namelbl} </label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">${namelbl}</div>
+							</div>
+							<form:input type="text" class="form-control" path="name"
+								value="${name}"></form:input>
+						</div>
 					</div>
-					<form:input type="text" class="form-control" path="birth"
-						value="${birth}"></form:input>
-				</div>
-			</div>
-			<div class="col-sm-12 my-1">
-				<label class="sr-only" for="inlineFormInputGroupUsername">
-					${accnumlbl} </label>
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<div class="input-group-text">${accnumlbl}</div>
+					<div class="col-sm-12 my-1 input-field">
+						<label class="sr-only" for="inlineFormInputGroupUsername">${dateofblbl}</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">${dateofblbl}</div>
+							</div>
+							<form:input type="date" class="form-control" path="birth"
+								value="${birth}"></form:input>
+						</div>
 					</div>
-					<form:input type="text" class="form-control" path="accountNumber"
-						value="${accountNumber}"></form:input>
-				</div>
-			</div>
-			<div class="col-sm-12 my-1">
-				<label class="sr-only" for="inlineFormInputGroupUsername">
-					${currencylbl} </label>
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<div class="input-group-text">${currencylbl}</div>
+					<div class="col-sm-12 my-1 input-field">
+						<label class="sr-only" for="inlineFormInputGroupUsername">
+							${accnumlbl} </label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">${accnumlbl}</div>
+							</div>
+							<form:input type="text" class="form-control" path="accountNumber"
+								value="${accountNumber}"></form:input>
+						</div>
 					</div>
-					<form:select class="custom-select" id="inputGroupSelect01"
-						path="currency">
-						<form:options items="${curopts}" />
-					</form:select>
-				</div>
-			</div>
-			<div class="col-sm-12 my-1">
-				<label class="sr-only" for="inlineFormInputGroupUsername">
-					${balancelbl} </label>
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<div class="input-group-text">${balancelbl}</div>
+					<div class="col-sm-12 my-1 input-field">
+						<label class="sr-only" for="inlineFormInputGroupUsername">
+							${currencylbl} </label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">${currencylbl}</div>
+							</div>
+							<form:select class="custom-select" id="inputGroupSelect01"
+								path="currency">
+								<form:options items="${curopts}" />
+							</form:select>
+						</div>
 					</div>
-					<form:input type="text" class="form-control" path="balance"
-						value="${balance}"></form:input>
-				</div>
+					<div class="col-sm-12 my-1 input-field">
+						<label class="sr-only" for="inlineFormInputGroupUsername">
+							${balancelbl} </label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">${balancelbl}</div>
+							</div>
+							<form:input type="text" class="form-control" path="balance"
+								value="${balance}"></form:input>
+						</div>
+					</div>
+					<input name="submit"
+						class="btn btn-primary general-button form-button" type="submit"
+						value="Save" />
+				</form:form>
 			</div>
-			<!-- 			<button type="button" class="btn btn-primary">Primary</button> -->
-			<input name="submit" class="btn btn-primary" type="submit"
-				value="Login" />
-		</form:form>
+		</div>
 	</div>
 
-
-
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">First</th>
-				<th scope="col">Last</th>
-				<th scope="col">Handle</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th scope="row">1</th>
-				<td>Mark</td>
-				<td>Otto</td>
-				<td>@mdo</td>
-			</tr>
-		</tbody>
-	</table>
-
-	<table class="table">
-		<thead class="thead-light">
-			<tr>
-				<th class="text-left"></th>
-				<th class="text-left">#</th>
-				<th class="text-left">Event title</th>
-				<th class="text-left">Event type</th>
-				<th class="text-left">Bet type</th>
-				<th class="text-left">Outcome value</th>
-				<th class="text-left">Outcome odd</th>
-				<th class="text-left">Wager amount</th>
-				<th class="text-left">Winner</th>
-				<th class="text-left">Processed</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="listItem : ${tableData}">
-				<td>
-					<button>Remove</button>
-				</td>
-				<td th:text="${listItem.index}">7.8</td>
-				<td th:text="${listItem.eventType}">LOW</td>
-				<td th:text="${listItem.betType}">Peter recommended</td>
-				<td th:text="${listItem.outcome}">7.8</td>
-				<td th:text="${listItem.outcomeOdd}">LOW</td>
-				<td th:text="${listItem.wagerAmount}">Peter recommended</td>
-				<td th:text="${listItem.isWin}">LOW</td>
-				<td th:text="${listItem.isProcessed}">Peter recommended</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="general-container">
+		<div class="card border-info mb-3 itemContainer">
+			<div class="card-header header-item my-header">
+				<span class="card-title my-card-title"> Account details </span>
+			</div>
+			<div class="card-body my-card-body">
+				<table class="table">
+					<tr>
+						<td></td>
+						<th class="text-left">#</th>
+						<th class="text-left">Event title</th>
+						<th class="text-left">Event type</th>
+						<th class="text-left">Bet type</th>
+						<th class="text-left">Outcome value</th>
+						<th class="text-left">Outcome odd</th>
+						<th class="text-left">Wager amount</th>
+						<th class="text-left">Winner</th>
+						<th class="text-left">Processed
+						</td>
+					</tr>
+					<c:forEach var="row" items="${tableData.tableData}" varStatus="vs">
+						<tr scope="col">
+							<td>
+								<div>
+									<form:form name='f ' action="remove" method='POST'
+										modelAttribute="tableData">
+										<form:hidden path="rowToDelete" value="${row.wagerId}" />
+										<input type="submit" class="btn btn-primary general-button"
+											value="Remove" />
+									</form:form>
+								</div>
+							</td>
+							<th scope="row">
+								<c:out value="${row.index}" />
+							</th>
+							<td>
+								<c:out value="${row.eventTitle}" />
+							</td>
+							<td>
+								<c:out value="${row.eventType}" />
+							</td>
+							<td>
+								<c:out value="${row.betType}" />
+							</td>
+							<td>
+								<c:out value="${row.outcome}" />
+							</td>
+							<td>
+								<c:out value="${row.outcomeOdd}" />
+							</td>
+							<td>
+								<c:out value="${row.wagerAmount}" />
+							</td>
+							<td>
+								<c:out value="${row.win}" />
+							</td>
+							<td>
+								<c:out value="${row.processed}" />
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
