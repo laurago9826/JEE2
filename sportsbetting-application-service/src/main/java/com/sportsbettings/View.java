@@ -56,7 +56,6 @@ public class View implements IView {
 	@Override
 	public void printOutcomeOdds(List<SportEvent> events) {
 		List<Bet> bets = events.get(0).getBets();
-		// List<Outcome> betss = events.get(0).getBets().get(0).getOutcomes();
 		StringBuilder s = new StringBuilder();
 		int counter = 1;
 		for (SportEvent event : events) {
