@@ -61,6 +61,10 @@ public class OutcomeOdd {
 		return outcome;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	@Override
 	public boolean equals(Object arg0) {
 		if (arg0 instanceof OutcomeOdd)

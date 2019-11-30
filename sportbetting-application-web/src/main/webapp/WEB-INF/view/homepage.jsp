@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -43,11 +44,9 @@
 					</div>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form>
+			<form:form class="form-inline my-2 my-lg-0" action="logout" method='POST'>
+				<input type="submit" class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Logout" />
+			</form:form>
 		</div>
 	</nav>
 	<div class="itemContainer">
@@ -71,8 +70,8 @@
 					<div class="input-group-prepend">
 						<div class="input-group-text">${dateofblbl}</div>
 					</div>
-					<form:input type="text" class="form-control" path="birth"
-						value="${birth}"></form:input>
+					<form:input type="date" class="form-control" path="birth"
+						value="${birth}" ></form:input>
 				</div>
 			</div>
 			<div class="col-sm-12 my-1">
@@ -110,9 +109,8 @@
 						value="${balance}"></form:input>
 				</div>
 			</div>
-			<!-- 			<button type="button" class="btn btn-primary">Primary</button> -->
 			<input name="submit" class="btn btn-primary" type="submit"
-				value="Login" />
+				value="Save" />
 		</form:form>
 	</div>
 
@@ -130,15 +128,20 @@
 			<th class="text-left">Winner</th>
 			<td class="text-left">Processed</td>
 		</tr>
-		<c:forEach var="row" items="${tableData}">
+		<c:forEach var="row" items="${tableData.tableData}" varStatus="vs">
 			<tr scope="col">
 				<td>
-					<c:out value="" />
+					<div>
+						<form:form name='f ' action="remove" method='POST' modelAttribute="tableData">
+							<form:hidden path="rowToDelete" value="${row.wagerId}" />
+							<input type="submit" class="btn btn-primary" value="Remove" />
+						</form:form>
+					</div>
 				</td>
 				<th scope="row">
 					<c:out value="${row.index}" />
 				</th>
-								<td>
+				<td>
 					<c:out value="${row.eventTitle}" />
 				</td>
 				<td>

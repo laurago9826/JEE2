@@ -25,4 +25,6 @@ public interface ISportsBettingService {
 	Player findPlayerById(int id);
 
 	boolean eventNotStarted(Wager w);
+
+	void deleteWager(int id);
 }

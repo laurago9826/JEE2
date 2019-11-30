@@ -89,6 +89,10 @@ public class Wager implements Serializable {
 		this.processed = processed;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	// ---BUILDER---
 	public static class WagerBuilder {
 		BigDecimal amount;

@@ -1,97 +1,27 @@
 package com.sportbettings.model;
 
+import java.util.List;
+
 public class TableData {
 
-	private boolean removeIsVisible;
-	private int index;
-	private String eventTitle;
-	private String eventType;
-	private String betType;
-	private String outcome;
-	private String outcomeOdd;
-	private String wagerAmount;
-	private boolean isWin;
-	private boolean processed;
+	private List<RowData> tableData;
 
-	public boolean isRemoveIsVisible() {
-		return removeIsVisible;
+	private int rowToDelete;
+
+	public List<RowData> getTableData() {
+		return tableData;
 	}
 
-	public int getIndex() {
-		return index;
+	public void setTableData(List<RowData> tableData) {
+		this.tableData = tableData;
 	}
 
-	public String getEventType() {
-		return eventType;
+	public int getRowToDelete() {
+		return rowToDelete;
 	}
 
-	public String getBetType() {
-		return betType;
-	}
-
-	public String getOutcome() {
-		return outcome;
-	}
-
-	public String getOutcomeOdd() {
-		return outcomeOdd;
-	}
-
-	public String getWagerAmount() {
-		return wagerAmount;
-	}
-
-	public boolean isWin() {
-		return isWin;
-	}
-
-	public boolean isProcessed() {
-		return processed;
-	}
-
-	public void setRemoveIsVisible(boolean removeIsVisible) {
-		this.removeIsVisible = removeIsVisible;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
-	public void setEventType(String eventType) {
-		this.eventType = eventType;
-	}
-
-	public void setBetType(String betType) {
-		this.betType = betType;
-	}
-
-	public void setOutcome(String outcome) {
-		this.outcome = outcome;
-	}
-
-	public void setOutcomeOdd(String outcomeOdd) {
-		this.outcomeOdd = outcomeOdd;
-	}
-
-	public void setWagerAmount(String wagerAmount) {
-		this.wagerAmount = wagerAmount;
-	}
-
-	public void setWin(boolean isWin) {
-		this.isWin = isWin;
-	}
-
-	public void setProcessed(boolean processed) {
-		this.processed = processed;
-	}
-
-	public String getEventTitle() {
-		return eventTitle;
-	}
-
-	public void setEventTitle(String eventTitle) {
-		this.eventTitle = eventTitle;
+	public void setRowToDelete(int rowToDelete) {
+		this.rowToDelete = rowToDelete;
 	}
 
 }
-

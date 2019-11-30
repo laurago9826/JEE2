@@ -1,12 +1,57 @@
 @charset "UTF-8";
-p{
-	color:#dd7127;
+
+.general-button {
+	background-color: #17a2b8;
+	border-color: #17a2b8;
 }
 
-.test {
-	background-color: aqua;
+.card-header {
+	background-color: #17a2b8;
+}
+
+.card-title {
+	color: white !important;
+	font-weight: bold;
+	font-size: 22px;
 }
 
 .itemContainer {
 	padding: 15px;
+}
+
+.login-div {
+	margin-left: 150px;
+}
+
+.login-message {
+	margin-left: 150px;
+	padding: 10px;
+}
+
+.login-message-component {
+	font-size: 25px;
+	font-weight: bolder;
+}
+
+.blue-title {
+	color: #17a2b8;	
+}
+
+.welcome-text {
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+.text-container {
+	align-content: center
+}
+
+.motto-text {
+	color: white;
+	text-align: center;
+}
+
+.main-container {
+	background-color: #343a40;
 }

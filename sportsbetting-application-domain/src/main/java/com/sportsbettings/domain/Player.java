@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "player")
 public class Player extends User {
@@ -22,6 +24,7 @@ public class Player extends User {
 
 	private BigDecimal balance;
 
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate birth;
 
 	private Currency currency;

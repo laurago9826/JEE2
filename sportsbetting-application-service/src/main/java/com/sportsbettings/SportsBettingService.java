@@ -45,7 +45,7 @@ public class SportsBettingService implements ISportsBettingService {
 
 	@Autowired
 	private WagerRepository wagerRepository;
-	
+
 	private static Player currentPlayer;
 
 	private static Logger LOGGER = LoggerFactory.getLogger(SportsBettingService.class);
@@ -71,9 +71,11 @@ public class SportsBettingService implements ISportsBettingService {
 	}
 
 	public void saveWager(Wager wager) {
-		wager.getPlayer().decreaseBalance(wager.getAmount());
-		wagerRepository.save(wager);
-		playerRepository.save(wager.getPlayer()); // update player balance
+		if (wager.getPlayer().getBalance().subtract(wager.getAmount()).intValue() > 0) {
+			wager.getPlayer().decreaseBalance(wager.getAmount());
+			wagerRepository.save(wager);
+			playerRepository.save(wager.getPlayer()); // update player balance
+		}
 
 	}
 
@@ -115,7 +117,7 @@ public class SportsBettingService implements ISportsBettingService {
 	private List<Outcome> selectWinnerOutcomes() {
 		List<Outcome> wins = new ArrayList<>();
 		Random rand = new Random();
-		for(SportEvent event : findAllSportEvents()) {
+		for (SportEvent event : findAllSportEvents()) {
 			for (Bet bet : event.getBets()) {
 				int size = bet.getOutcomes().size();
 				if (size > 0)
@@ -124,51 +126,39 @@ public class SportsBettingService implements ISportsBettingService {
 		}
 		return wins;
 	}
-	
+
 	public boolean eventNotStarted(Wager w) {
 		return w.getOdd().getOutcome().getBet().getSportEvent().getStartDate().isAfter(LocalDateTime.now());
 	}
 
+	public void deleteWager(int id) {
+		wagerRepository.deleteById(id);
+	}
+
 	// ---TEST-DATA---
 	public void createTestData() {
-			SportEvent event = SportEventBuilder.newInstance().setTitle("bet1")
-					.setStartDate(LocalDateTime.of(2019, 3, 26, 15, 15)).setEndDate(LocalDateTime.of(2019, 3, 26, 15, 15))
-					.buildTennisEvent();
-			Bet bet1 = BetBuilder.newInstance().setBetType(BetType.GOALS).setDescription("desc")
-					.setSportEvent(event)
-					.build();
-			Bet bet2 = BetBuilder.newInstance().setBetType(BetType.GOALS).setDescription("desc")
-					.setSportEvent(event)
-					.build();
-			Outcome outcome1 = OutcomeBuilder.newInstance().setDescription("desc2")
-					.setBet(bet1)
-					.build();
-			Outcome outcome2 = OutcomeBuilder.newInstance().setDescription("desc2")
-					.setBet(bet1)
-					.build();
-			Outcome outcome3 = OutcomeBuilder.newInstance().setDescription("desc3")
-					.setBet(bet2)
-					.build();
-			OutcomeOdd odd1 = OutcomeOddBuilder.newInstance().setOddValue(new BigDecimal("3.0")).setCurrency(Currency.EUR)
+		SportEvent event = SportEventBuilder.newInstance().setTitle("bet1")
+				.setStartDate(LocalDateTime.of(2019, 3, 26, 15, 15)).setEndDate(LocalDateTime.of(2019, 3, 26, 15, 15))
+				.buildTennisEvent();
+		Bet bet1 = BetBuilder.newInstance().setBetType(BetType.GOALS).setDescription("desc").setSportEvent(event)
+				.build();
+		Bet bet2 = BetBuilder.newInstance().setBetType(BetType.GOALS).setDescription("desc").setSportEvent(event)
+				.build();
+		Outcome outcome1 = OutcomeBuilder.newInstance().setDescription("desc2").setBet(bet1).build();
+		Outcome outcome2 = OutcomeBuilder.newInstance().setDescription("desc2").setBet(bet1).build();
+		Outcome outcome3 = OutcomeBuilder.newInstance().setDescription("desc3").setBet(bet2).build();
+		OutcomeOdd odd1 = OutcomeOddBuilder.newInstance().setOddValue(new BigDecimal("3.0")).setCurrency(Currency.EUR)
 				.setValidFrom(LocalDateTime.of(2019, 9, 26, 15, 15))
-				.setValidUntil(LocalDateTime.of(2019, 12, 26, 15, 15))
-					.setOutcome(outcome1)
-					.build();
+				.setValidUntil(LocalDateTime.of(2019, 12, 26, 15, 15)).setOutcome(outcome1).build();
 		OutcomeOdd odd2 = OutcomeOddBuilder.newInstance().setOddValue(new BigDecimal("4.0")).setCurrency(Currency.EUR)
 				.setValidFrom(LocalDateTime.of(2019, 9, 26, 15, 15))
-				.setValidUntil(LocalDateTime.of(2019, 12, 26, 15, 15))
-					.setOutcome(outcome2)
-					.build();
+				.setValidUntil(LocalDateTime.of(2019, 12, 26, 15, 15)).setOutcome(outcome2).build();
 		OutcomeOdd odd3 = OutcomeOddBuilder.newInstance().setOddValue(new BigDecimal("2.0")).setCurrency(Currency.EUR)
 				.setValidFrom(LocalDateTime.of(2019, 9, 26, 15, 15))
-				.setValidUntil(LocalDateTime.of(2019, 10, 26, 15, 15))
-					.setOutcome(outcome2)
-					.build();
+				.setValidUntil(LocalDateTime.of(2019, 10, 26, 15, 15)).setOutcome(outcome2).build();
 		OutcomeOdd odd4 = OutcomeOddBuilder.newInstance().setOddValue(new BigDecimal("5.0")).setCurrency(Currency.EUR)
 				.setValidFrom(LocalDateTime.of(2019, 9, 26, 15, 15))
-				.setValidUntil(LocalDateTime.of(2019, 12, 26, 15, 15))
-					.setOutcome(outcome3)
-					.build();
+				.setValidUntil(LocalDateTime.of(2019, 12, 26, 15, 15)).setOutcome(outcome3).build();
 		sportEventRepository.save(event);
 		Wager w = WagerBuilder.newInstance().setAmount(new BigDecimal(100)).setPlayer(currentPlayer)
 				.setCurrency(currentPlayer.getCurrency()).setOdd(odd1).build();
