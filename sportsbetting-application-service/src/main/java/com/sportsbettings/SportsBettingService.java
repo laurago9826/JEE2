@@ -63,6 +63,9 @@ public class SportsBettingService implements ISportsBettingService {
 	}
 
 	public Player findPlayer() {
+		if (currentPlayer == null) {
+			return null;
+		}
 		return playerRepository.findById(currentPlayer.getId()).get();
 	}
 

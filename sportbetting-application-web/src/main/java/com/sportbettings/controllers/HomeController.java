@@ -61,6 +61,9 @@ public class HomeController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home() {
 		Player player = service.findPlayer();
+		if (player == null) {
+			return new ModelAndView("redirect:/");
+		}
 		ModelAndView mv = new ModelAndView("homepage", "player", player);
 		mv.addObject("id", player.getId());
 		Map<String, String> curopts = new HashMap<>();

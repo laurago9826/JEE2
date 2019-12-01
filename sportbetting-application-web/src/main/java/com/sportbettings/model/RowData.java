@@ -111,6 +111,5 @@ public class RowData {
 	public void setClassNameOnButton(String classNameOnButton) {
 		this.classNameOnButton = classNameOnButton;
 	}
-
 }
 
