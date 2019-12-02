@@ -96,3 +96,7 @@
 .dropdown-item:active {
 	background-color: white;
 }
+
+.hide-remove {
+	display: none;
+}

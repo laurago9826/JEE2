@@ -6,7 +6,6 @@
 <head>
 <script src="<c:url value="/resources/js/jquery.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-<script src="<c:url value="/resources/js/hideRemove.js" />"></script>
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/styles.css" />"
@@ -146,12 +145,12 @@
 					<c:forEach var="row" items="${tableData.tableData}" varStatus="vs">
 						<tr scope="col">
 							<td>
-								<div>
+								<div class=" ${row.classNameOnButton}">
 									<form:form name='f ' action="remove" method='POST'
 										modelAttribute="tableData">
 										<form:hidden path="rowToDelete" value="${row.wagerId}" />
 										<input type="submit"
-											class="btn btn-primary general-button ${row.classNameOnButton}"
+											class="btn btn-primary general-button"
 											value="${remove}" />
 									</form:form>
 								</div>
