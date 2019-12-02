@@ -35,6 +35,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public String logout() {
+		service.logoutPlayer();
 		return "redirect:/";
 	}
 

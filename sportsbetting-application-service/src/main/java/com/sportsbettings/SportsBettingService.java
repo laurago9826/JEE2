@@ -58,6 +58,10 @@ public class SportsBettingService implements ISportsBettingService {
 		playerRepository.save(player);
 	}
 
+	public void logoutPlayer() {
+		currentPlayer = null;
+	}
+
 	public Player findPlayerById(int id) {
 		return playerRepository.findById(id).get();
 	}

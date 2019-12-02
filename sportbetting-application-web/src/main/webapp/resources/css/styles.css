@@ -80,7 +80,7 @@
 }
 
 .table td, .table th{
-	padding: 6px 12px 6px 12px;
+	padding: 4px 8px 4px 8px;
 	font-size: 15px;
 }
 
@@ -99,4 +99,12 @@
 
 .hide-remove {
 	display: none;
+}
+
+table tr td {
+	height: 45px;
+}
+
+.hide-remove td {
+	padding: 3px 6px 3px 6px	
 }

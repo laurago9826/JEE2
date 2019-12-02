@@ -43,6 +43,7 @@ public class LoginController {
 	}
 
 	private ModelAndView localizeLoginPage(ModelAndView mv) {
+		mv.addObject("sportsbetting", getEnglishStringp("sportsBetting", null));
 		mv.addObject("welcome", getEnglishStringp("welcome", null));
 		mv.addObject("motto", getEnglishStringp("motto", null));
 		mv.addObject("login", getEnglishStringp("login", null));

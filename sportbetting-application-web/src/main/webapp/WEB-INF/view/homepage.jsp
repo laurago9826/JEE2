@@ -87,7 +87,7 @@
 							<div class="input-group-prepend">
 								<div class="input-group-text">${accountNumberlbl}</div>
 							</div>
-							<form:input type="text" class="form-control" path="accountNumber"
+							<form:input type="number" class="form-control" path="accountNumber"
 								value="${accountNumber}"></form:input>
 						</div>
 					</div>
@@ -111,7 +111,7 @@
 							<div class="input-group-prepend">
 								<div class="input-group-text">${balancelbl}</div>
 							</div>
-							<form:input type="text" class="form-control" path="balance"
+							<form:input type="number" class="form-control" path="balance"
 								value="${balance}"></form:input>
 						</div>
 					</div>
