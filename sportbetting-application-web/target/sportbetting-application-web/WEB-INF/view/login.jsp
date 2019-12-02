@@ -7,7 +7,7 @@
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/styles.css" />"
 	rel="stylesheet">
-<title>Getting Started: Serving Web Content</title>
+<title> ${sportsbetting} </title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>

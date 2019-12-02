@@ -4,20 +4,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link href="<c:url value="/resources/js/jquery.min.js" />"
-	rel="script">
-<link href="<c:url value="/resources/js/bootstrap.min.js" />"
-	rel="script">
+<script src="<c:url value="/resources/js/jquery.min.js" />"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/styles.css" />"
 	rel="stylesheet">
-<title>Getting Started: Serving Web Content</title>
+<title>${sportsbetting}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">Sportsbetting</a>
+		<a class="navbar-brand" href="#">${sportsbetting}</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -28,30 +26,26 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">
-						Home
-						<span class="sr-only">(current)</span>
-					</a>
+					<a class="nav-link"> ${home} </a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Events</a>
+					<a class="nav-link">${events}</a>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					<a class="nav-link dropdown-toggle" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> Language </a>
+						aria-expanded="false"> ${language} </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">Action</a>
-						<a class="dropdown-item" href="#">Another action</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Something else here</a>
+						<a class="dropdown-item"> ${english} </a>
+						<a class="dropdown-item"> ${hungarian} </a>
 					</div>
 				</li>
 			</ul>
 			<form:form class="form-inline my-2 my-lg-0" action="logout"
 				method='POST'>
-				<input type="submit" class="btn btn-outline-dark my-2 my-sm-0 logout-btn"
-					type="submit" value="Logout" />
+				<input type="submit"
+					class="btn btn-outline-dark my-2 my-sm-0 logout-btn" type="submit"
+					value="Logout" />
 			</form:form>
 		</div>
 	</nav>
@@ -59,7 +53,7 @@
 	<div class="general-container">
 		<div class="card border-info mb-3 itemContainer">
 			<div class="card-header header-item my-header">
-				<span class="card-title my-card-title"> Account details </span>
+				<span class="card-title my-card-title"> ${playerDetails} </span>
 			</div>
 			<div class="card-body my-card-body">
 				<form:form name='f' action="save" method='POST'
@@ -77,10 +71,10 @@
 						</div>
 					</div>
 					<div class="col-sm-12 my-1 input-field">
-						<label class="sr-only" for="inlineFormInputGroupUsername">${dateofblbl}</label>
+						<label class="sr-only" for="inlineFormInputGroupUsername">${birthlbl}</label>
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<div class="input-group-text">${dateofblbl}</div>
+								<div class="input-group-text">${birthlbl}</div>
 							</div>
 							<form:input type="date" class="form-control" path="birth"
 								value="${birth}"></form:input>
@@ -88,21 +82,21 @@
 					</div>
 					<div class="col-sm-12 my-1 input-field">
 						<label class="sr-only" for="inlineFormInputGroupUsername">
-							${accnumlbl} </label>
+							${accountNumberlbl} </label>
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<div class="input-group-text">${accnumlbl}</div>
+								<div class="input-group-text">${accountNumberlbl}</div>
 							</div>
-							<form:input type="text" class="form-control" path="accountNumber"
+							<form:input type="number" class="form-control" path="accountNumber"
 								value="${accountNumber}"></form:input>
 						</div>
 					</div>
 					<div class="col-sm-12 my-1 input-field">
 						<label class="sr-only" for="inlineFormInputGroupUsername">
-							${currencylbl} </label>
+							${currency} </label>
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<div class="input-group-text">${currencylbl}</div>
+								<div class="input-group-text">${currency}</div>
 							</div>
 							<form:select class="custom-select" id="inputGroupSelect01"
 								path="currency">
@@ -117,13 +111,13 @@
 							<div class="input-group-prepend">
 								<div class="input-group-text">${balancelbl}</div>
 							</div>
-							<form:input type="text" class="form-control" path="balance"
+							<form:input type="number" class="form-control" path="balance"
 								value="${balance}"></form:input>
 						</div>
 					</div>
 					<input name="submit"
 						class="btn btn-primary general-button form-button" type="submit"
-						value="Save" />
+						value="${save}" />
 				</form:form>
 			</div>
 		</div>
@@ -132,32 +126,32 @@
 	<div class="general-container">
 		<div class="card border-info mb-3 itemContainer">
 			<div class="card-header header-item my-header">
-				<span class="card-title my-card-title"> Account details </span>
+				<span class="card-title my-card-title"> ${playerDetails} </span>
 			</div>
 			<div class="card-body my-card-body">
 				<table class="table">
 					<tr>
 						<td></td>
 						<th class="text-left">#</th>
-						<th class="text-left">Event title</th>
-						<th class="text-left">Event type</th>
-						<th class="text-left">Bet type</th>
-						<th class="text-left">Outcome value</th>
-						<th class="text-left">Outcome odd</th>
-						<th class="text-left">Wager amount</th>
-						<th class="text-left">Winner</th>
-						<th class="text-left">Processed
-						</td>
+						<th class="text-left">${eventTitle}</th>
+						<th class="text-left">${eventType}</th>
+						<th class="text-left">${betType}</th>
+						<th class="text-left">${outcomeValue}</th>
+						<th class="text-left">${outcomeOdd}</th>
+						<th class="text-left">${wagerAmount}</th>
+						<th class="text-left">${winner}</th>
+						<th class="text-left">${processedd}</th>
 					</tr>
 					<c:forEach var="row" items="${tableData.tableData}" varStatus="vs">
 						<tr scope="col">
 							<td>
-								<div>
+								<div class=" ${row.classNameOnButton}">
 									<form:form name='f ' action="remove" method='POST'
 										modelAttribute="tableData">
 										<form:hidden path="rowToDelete" value="${row.wagerId}" />
-										<input type="submit" class="btn btn-primary general-button"
-											value="Remove" />
+										<input type="submit"
+											class="btn btn-primary general-button"
+											value="${remove}" />
 									</form:form>
 								</div>
 							</td>
