@@ -19,5 +19,6 @@ public class FootballSportEvent extends SportEvent {
 
 	protected FootballSportEvent() {
 		super();
+		// hibernate
 	}
 }

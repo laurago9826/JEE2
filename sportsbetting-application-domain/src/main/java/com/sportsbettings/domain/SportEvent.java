@@ -28,7 +28,6 @@ public abstract class SportEvent {
 	private LocalDateTime endDate;
 
 	@OneToMany(mappedBy = "sportEvent", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	// @Fetch(value = FetchMode.SUBSELECT)
 	private List<Bet> bets = new ArrayList<Bet>();
 
 	@OneToOne(cascade = CascadeType.ALL)

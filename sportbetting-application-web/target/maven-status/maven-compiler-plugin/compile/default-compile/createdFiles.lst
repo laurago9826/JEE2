@@ -1,0 +1,6 @@
+com\sportbettings\config\MvcConfig.class
+com\sportbettings\config\HomeInitializer.class
+com\sportbettings\controllers\LoginController.class
+com\sportbettings\model\RowData.class
+com\sportbettings\model\TableData.class
+com\sportbettings\controllers\HomeController.class

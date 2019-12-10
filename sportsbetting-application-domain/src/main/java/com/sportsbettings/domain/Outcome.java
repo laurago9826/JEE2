@@ -13,9 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 @Entity
 @Table(name = "outcome")
 public class Outcome {
@@ -31,9 +28,7 @@ public class Outcome {
 	private Bet bet;
 
 	@OneToMany(mappedBy = "outcome", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@Fetch(value = FetchMode.SUBSELECT)
 	private List<OutcomeOdd> outcomeOdds = new ArrayList<OutcomeOdd>();
-
 
 	private Outcome(OutcomeBuilder ob) {
 		this.description = ob.description;

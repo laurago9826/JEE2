@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+.general-button, .general-button:hover, .general-button:not(:disabled):not(.disabled).active,
+ .general-button:not(:disabled):not(.disabled):active
+ {
+	background-color: #17a2b8 !important;
+	border-color: #17a2b8 !important;
+}
+
+.card-header {
+	background-color: #17a2b8;
+}
+
+.card-title {
+	color: white !important;
+	font-weight: bold;
+	font-size: 22px;
+}
+
+.login-div {
+	margin-left: 150px;
+}
+
+.login-message {
+	margin-left: 150px;
+	padding: 10px;
+}
+
+.login-message-component {
+	font-size: 25px;
+	font-weight: bolder;
+}
+
+.blue-title {
+	color: #17a2b8;	
+}
+
+.welcome-text {
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+.text-container {
+	align-content: center
+}
+
+.motto-text {
+	color: white;
+	text-align: center;
+}
+
+.main-container {
+	background-color: #343a40;
+}
+
+.my-header {
+	padding: 8px 20px 8px 20px;
+}
+
+.general-container {
+	padding: 15px 15px 0px 15px;
+}
+
+.input-field {
+	padding: 6px 10px 0px 10px;
+}
+
+.my-card-body {
+	padding: 0px;
+}
+
+.my-card-title {
+	font-weight: normal;
+	font-size: 17px;
+}
+
+.form-button {
+	margin: 6px 10px 6px 10px;
+}
+
+.table td, .table th{
+	padding: 4px 8px 4px 8px;
+	font-size: 15px;
+}
+
+.table {
+	margin: 0px;
+}
+
+.logout-btn, .logout-btn:hover {
+	color: white;
+	border-color: white;
+}
+
+.dropdown-item:active {
+	background-color: white;
+}
+
+.hide-remove {
+	display: none;
+}
+
+table tr td {
+	height: 45px;
+}
+
+.hide-remove td {
+	padding: 3px 6px 3px 6px	
+}

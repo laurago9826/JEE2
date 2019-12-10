@@ -63,14 +63,14 @@ public class SportsBettingService implements ISportsBettingService {
 	}
 
 	public Player findPlayerById(int id) {
-		return playerRepository.findById(id).get();
+		return playerRepository.findById(id).orElse(null);
 	}
 
 	public Player findPlayer() {
 		if (currentPlayer == null) {
 			return null;
 		}
-		return playerRepository.findById(currentPlayer.getId()).get();
+		return playerRepository.findById(currentPlayer.getId()).orElse(null);
 	}
 
 	public List<SportEvent> findAllSportEvents() {
@@ -157,7 +157,8 @@ public class SportsBettingService implements ISportsBettingService {
 		SportEvent event2 = SportEventBuilder.newInstance().setTitle("event2")
 				.setStartDate(LocalDateTime.of(2020, 3, 26, 15, 15)).setEndDate(LocalDateTime.of(2020, 3, 26, 15, 15))
 				.buildFootballEvent();
-		Bet bet1 = BetBuilder.newInstance().setBetType(BetType.GOALS).setDescription("bet1").setSportEvent(event)
+		Bet bet1 = BetBuilder.newInstance().setBetType(BetType.PLAYERS_SCORE).setDescription("bet1")
+				.setSportEvent(event)
 				.build();
 		Bet bet2 = BetBuilder.newInstance().setBetType(BetType.GOALS).setDescription("bet2").setSportEvent(event2)
 				.build();

@@ -3,11 +3,9 @@ package com.sportbettings.controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +22,6 @@ import com.sportsbettings.domain.Wager;
 
 @Controller
 public class HomeController {
-
-	@Autowired
-	private MessageSource messageSource;
 
 	@Autowired
 	private ISportsBettingService service;
@@ -73,7 +68,6 @@ public class HomeController {
 		}
 		mv.addObject("curopts", curopts);
 		addTableContent(mv);
-		localizeHomePage(mv);
 		return mv;
 	}
 
@@ -88,19 +82,18 @@ public class HomeController {
 				d.setRemoveIsVisible(service.eventNotStarted(w));
 				d.setIndex(counter);
 				d.setEventTitle(w.getOdd().getOutcome().getBet().getSportEvent().getTitle());
-				d.setEventType(
-						getEnglishStringp(w.getOdd().getOutcome().getBet().getSportEvent().getClass().getName(), null));
-				d.setBetType(w.getOdd().getOutcome().getBet().getDescription());
+				d.setEventType(w.getOdd().getOutcome().getBet().getSportEvent().getClass().getName());
+				d.setBetType(w.getOdd().getOutcome().getBet().getBetType().name().toLowerCase());
 				d.setOutcome(w.getOdd().getOutcome().getDescription());
 				d.setOutcomeOdd("1:" + w.getOdd().getOddValue().intValue());
 				d.setWagerAmount(w.getAmount().intValue() + " " + w.getPlayer().getCurrency());
 				if (d.isRemoveIsVisible()) {
-					d.setWin(getEnglishStringp("unknown", null));
-					d.setProcessed(getEnglishStringp("unknown", null));
+					d.setWin("unknown");
+					d.setProcessed("unknown");
 				}
 				else {
-					d.setWin(getEnglishStringp(String.valueOf(w.isWin()), null));
-					d.setProcessed(getEnglishStringp(String.valueOf(w.isProcessed()), null));
+					d.setWin(String.valueOf(w.isWin()));
+					d.setProcessed(String.valueOf(w.isProcessed()));
 				}
 				d.setClassNameOnButton(d.isRemoveIsVisible() ? "visible-remove" : "hide-remove");
 				d.setWagerId(w.getId());
@@ -112,39 +105,4 @@ public class HomeController {
 		tableData.setTableData(rowData);
 		mv.addObject("tableData", tableData);
 	}
-
-	private void localizeHomePage(ModelAndView mv) {
-		mv.addObject("sportsbetting", getEnglishStringp("sportsBetting", null));
-		mv.addObject("home", getEnglishStringp("home", null));
-		mv.addObject("events", getEnglishStringp("events", null));
-		mv.addObject("language", getEnglishStringp("language", null));
-		mv.addObject("english", getEnglishStringp("english", null));
-		mv.addObject("hungarian", getEnglishStringp("hungarian", null));
-		mv.addObject("playerDetails", getEnglishStringp("playerDetails", null));
-		mv.addObject("namelbl", getEnglishStringp("name", null));
-		mv.addObject("birthlbl", getEnglishStringp("birth", null));
-		mv.addObject("accountNumberlbl", getEnglishStringp("accountNumber", null));
-		mv.addObject("currency", getEnglishStringp("currency", null));
-		mv.addObject("balancelbl", getEnglishStringp("balance", null));
-		mv.addObject("save", getEnglishStringp("save", null));
-		mv.addObject("wagers", getEnglishStringp("wagers", null));
-		mv.addObject("remove", getEnglishStringp("remove", null));
-		mv.addObject("eventTitle", getEnglishStringp("eventTitle", null));
-		mv.addObject("eventType", getEnglishStringp("eventType", null));
-		mv.addObject("betType", getEnglishStringp("betType", null));
-		mv.addObject("outcomeValue", getEnglishStringp("outcomeValue", null));
-		mv.addObject("outcomeOdd", getEnglishStringp("outcomeOdd", null));
-		mv.addObject("wagerAmount", getEnglishStringp("wagerAmount", null));
-		mv.addObject("true", getEnglishStringp("true", null));
-		mv.addObject("false", getEnglishStringp("false", null));
-		mv.addObject("unknown", getEnglishStringp("unknown", null));
-		mv.addObject("logout", getEnglishStringp("logout", null));
-		mv.addObject("winner", getEnglishStringp("winner", null));
-		mv.addObject("processedd", getEnglishStringp("processed", null));
-	}
-
-	private String getEnglishStringp(String key, Object param) {
-		return messageSource.getMessage(key, new Object[] { param }, Locale.ENGLISH);
-	}
-
 }

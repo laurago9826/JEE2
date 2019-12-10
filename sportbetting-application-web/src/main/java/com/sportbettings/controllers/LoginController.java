@@ -1,9 +1,6 @@
 package com.sportbettings.controllers;
 
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +17,11 @@ import com.sportsbettings.domain.User;
 public class LoginController {
 
 	@Autowired
-	private MessageSource messageSource;
-
-	@Autowired
 	private ISportsBettingService service;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("login", "user", new User());
-		localizeLoginPage(mv);
 		return mv;
 
 	}
@@ -40,22 +33,5 @@ public class LoginController {
 		Player p = PlayerBuilder.newInstance().setEmail(user.getEmail()).setPassword(user.getPassword()).build();
 		service.savePlayer(p);
 		return "redirect:/home";
-	}
-
-	private ModelAndView localizeLoginPage(ModelAndView mv) {
-		mv.addObject("sportsbetting", getEnglishStringp("sportsBetting", null));
-		mv.addObject("welcome", getEnglishStringp("welcome", null));
-		mv.addObject("motto", getEnglishStringp("motto", null));
-		mv.addObject("login", getEnglishStringp("login", null));
-		mv.addObject("register", getEnglishStringp("register", null));
-		mv.addObject("orr", getEnglishStringp("or", null));
-		mv.addObject("toStart", getEnglishStringp("toStart", null));
-		mv.addObject("email", getEnglishStringp("email", null));
-		mv.addObject("password", getEnglishStringp("password", null));
-		return mv;
-	}
-
-	private String getEnglishStringp(String key, Object param) {
-		return messageSource.getMessage(key, new Object[] { param }, Locale.ENGLISH);
 	}
 }
