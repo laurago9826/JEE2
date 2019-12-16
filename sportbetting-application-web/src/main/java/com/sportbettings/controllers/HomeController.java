@@ -31,7 +31,7 @@ public class HomeController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public String logout() {
 		service.logoutPlayer();
-		return "redirect:/";
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -47,9 +47,9 @@ public class HomeController {
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(@ModelAttribute("player") Player player, @RequestParam(value = "id") String id) {
-		player.setId(Integer.parseInt(id));
+		// player.setId(Integer.parseInt(id));
 		service.savePlayer(player);
-		service.createTestData(); // hogy lássunk is valamit
+		service.saveTestWagers();
 		service.calculateResults();
 		return "redirect:/home";
 	}
@@ -57,9 +57,6 @@ public class HomeController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home() {
 		Player player = service.findPlayer();
-		if (player == null) {
-			return new ModelAndView("redirect:/");
-		}
 		ModelAndView mv = new ModelAndView("homepage", "player", player);
 		mv.addObject("id", player.getId());
 		Map<String, String> curopts = new HashMap<>();

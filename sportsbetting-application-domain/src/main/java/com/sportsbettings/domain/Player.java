@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,10 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "player")
 public class Player extends User {
-
-	@Id
-	@GeneratedValue
-	private int id;
 
 	private String name;
 
@@ -102,7 +96,7 @@ public class Player extends User {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Player) {
-			return ((Player) obj).getId() == this.id;
+			return ((Player) obj).getEmail() == this.email;
 		}
 		return false;
 	}

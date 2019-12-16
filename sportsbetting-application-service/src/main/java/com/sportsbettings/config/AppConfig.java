@@ -1,9 +1,13 @@
 package com.sportsbettings.config;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.sportsbettings.App;
 import com.sportsbettings.ISportsBettingService;
@@ -31,11 +35,16 @@ public class AppConfig {
 		return new View();
 	}
 
-//	@Bean
-//	MessageSource messageSource() {
-//		ResourceBundleMessageSource rbms = new ResourceBundleMessageSource();
-//		rbms.addBasenames("lang_files/langfile");
-//		rbms.setUseCodeAsDefaultMessage(true);
-//		return rbms;
-//	}
+	@Bean
+	MessageSource messageSource() {
+		ResourceBundleMessageSource rbms = new ResourceBundleMessageSource();
+		rbms.addBasenames("lang_files/langfile");
+		rbms.setUseCodeAsDefaultMessage(true);
+		return rbms;
+	}
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }

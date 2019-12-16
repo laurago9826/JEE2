@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -21,14 +24,17 @@ import com.sportsbettings.domain.Outcome.OutcomeBuilder;
 import com.sportsbettings.domain.OutcomeOdd;
 import com.sportsbettings.domain.OutcomeOdd.OutcomeOddBuilder;
 import com.sportsbettings.domain.Player;
+import com.sportsbettings.domain.Player.PlayerBuilder;
 import com.sportsbettings.domain.Result;
 import com.sportsbettings.domain.SportEvent;
 import com.sportsbettings.domain.SportEvent.SportEventBuilder;
+import com.sportsbettings.domain.User;
 import com.sportsbettings.domain.Wager;
 import com.sportsbettings.domain.Wager.WagerBuilder;
 import com.sportsbettings.repository.PlayerRepository;
 import com.sportsbettings.repository.ResultRepository;
 import com.sportsbettings.repository.SportEventRepository;
+import com.sportsbettings.repository.UserRepository;
 import com.sportsbettings.repository.WagerRepository;
 
 @Service
@@ -46,6 +52,12 @@ public class SportsBettingService implements ISportsBettingService {
 	@Autowired
 	private WagerRepository wagerRepository;
 
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	private static Player currentPlayer;
 
 	private static Logger LOGGER = LoggerFactory.getLogger(SportsBettingService.class);
@@ -60,10 +72,6 @@ public class SportsBettingService implements ISportsBettingService {
 
 	public void logoutPlayer() {
 		currentPlayer = null;
-	}
-
-	public Player findPlayerById(int id) {
-		return playerRepository.findById(id).orElse(null);
 	}
 
 	public Player findPlayer() {
@@ -149,7 +157,12 @@ public class SportsBettingService implements ISportsBettingService {
 		wagerRepository.deleteById(id);
 	}
 
-	// ---TEST-DATA---
+	public User findUserByEmail(String email) {
+		return Lists.newArrayList(userRepository.findAll()).stream().filter(x -> x.getEmail().equals(email)).findAny()
+				.orElse(null);
+	}
+
+	@PostConstruct
 	public void createTestData() {
 		SportEvent event = SportEventBuilder.newInstance().setTitle("event1")
 				.setStartDate(LocalDateTime.of(2019, 3, 26, 15, 15)).setEndDate(LocalDateTime.of(2019, 3, 26, 15, 15))
@@ -158,8 +171,7 @@ public class SportsBettingService implements ISportsBettingService {
 				.setStartDate(LocalDateTime.of(2020, 3, 26, 15, 15)).setEndDate(LocalDateTime.of(2020, 3, 26, 15, 15))
 				.buildFootballEvent();
 		Bet bet1 = BetBuilder.newInstance().setBetType(BetType.PLAYERS_SCORE).setDescription("bet1")
-				.setSportEvent(event)
-				.build();
+				.setSportEvent(event).build();
 		Bet bet2 = BetBuilder.newInstance().setBetType(BetType.GOALS).setDescription("bet2").setSportEvent(event2)
 				.build();
 		Outcome outcome1 = OutcomeBuilder.newInstance().setDescription("outcome1").setBet(bet1).build();
@@ -179,14 +191,30 @@ public class SportsBettingService implements ISportsBettingService {
 				.setValidUntil(LocalDateTime.of(2019, 12, 26, 15, 15)).setOutcome(outcome3).build();
 		sportEventRepository.save(event);
 		sportEventRepository.save(event2);
+		Player player = PlayerBuilder.newInstance().setEmail("laura.guljas@gmail.com")
+				.setPassword(passwordEncoder.encode("blabla")).build();
+		savePlayer(player);
+	}
+
+	public void saveTestWagers() {
+		List<OutcomeOdd> odds = new ArrayList<OutcomeOdd>();
+		for (SportEvent sp : sportEventRepository.findAll()) {
+			for (Bet b : sp.getBets()) {
+				for (Outcome o : b.getOutcomes()) {
+					for (OutcomeOdd oo : o.getOutcomeOdds()) {
+						odds.add(oo);
+					}
+				}
+			}
+		}
 		Wager w = WagerBuilder.newInstance().setAmount(new BigDecimal(100)).setPlayer(currentPlayer)
-				.setCurrency(currentPlayer.getCurrency()).setOdd(odd1).build();
+				.setCurrency(currentPlayer.getCurrency()).setOdd(odds.get(0)).build();
 		Wager w2 = WagerBuilder.newInstance().setAmount(new BigDecimal(100)).setPlayer(currentPlayer)
-				.setCurrency(currentPlayer.getCurrency()).setOdd(odd2).build();
+				.setCurrency(currentPlayer.getCurrency()).setOdd(odds.get(1)).build();
 		Wager w3 = WagerBuilder.newInstance().setAmount(new BigDecimal(100)).setPlayer(currentPlayer)
-				.setCurrency(currentPlayer.getCurrency()).setOdd(odd3).build();
+				.setCurrency(currentPlayer.getCurrency()).setOdd(odds.get(2)).build();
 		Wager w4 = WagerBuilder.newInstance().setAmount(new BigDecimal(100)).setPlayer(currentPlayer)
-				.setCurrency(currentPlayer.getCurrency()).setOdd(odd4).build();
+				.setCurrency(currentPlayer.getCurrency()).setOdd(odds.get(3)).build();
 		this.saveWager(w);
 		this.saveWager(w2);
 		this.saveWager(w3);

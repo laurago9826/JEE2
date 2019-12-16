@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
+
 	@Id
 	@GeneratedValue
 	protected int id;

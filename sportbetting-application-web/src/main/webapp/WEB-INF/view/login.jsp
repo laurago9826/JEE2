@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -57,12 +58,14 @@
 				<div class="form-group">
 					<spring:message code="password" var="password" />
 					<form:input type="password" class="form-control"
-						id="exampleInputPassword1"
-						placeholder="${password}" path="password" />
+						id="exampleInputPassword1" placeholder="${password}"
+						path="password" />
 				</div>
-				<spring:message code="login" var="login"/>
-				<input type="submit" class="btn btn-primary general-button" value="${login}"/>
-
+				<spring:message code="login" var="login" />
+				<input type="submit" class="btn btn-primary general-button"
+					value="${login}" />
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
 			</form:form>
 		</div>
 	</div>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sportsbettings.domain.Player;
 import com.sportsbettings.domain.SportEvent;
+import com.sportsbettings.domain.User;
 import com.sportsbettings.domain.Wager;
 
 public interface ISportsBettingService {
@@ -22,11 +23,15 @@ public interface ISportsBettingService {
 
 	void createTestData();
 
-	Player findPlayerById(int id);
+	// Player findPlayerById(int id);
 
 	boolean eventNotStarted(Wager w);
 
 	void deleteWager(int id);
+	
+	User findUserByEmail(String email);
 
 	void logoutPlayer();
+
+	void saveTestWagers();
 }

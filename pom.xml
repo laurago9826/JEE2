@@ -112,7 +112,18 @@
 			<artifactId>google-collections</artifactId>
 			<version>1.0-rc2</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>5.2.1.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>5.2.1.RELEASE</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
@@ -169,7 +180,7 @@
 						<archive>
 							<manifest>
 								<addClasspath>true</addClasspath>
-								<mainClass>com.sportsbettings.App</mainClass>
+								<mainClass>com.sportsbettings.AppSpring</mainClass>
 							</manifest>
 						</archive>
 					</configuration>
