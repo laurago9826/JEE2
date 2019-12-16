@@ -96,7 +96,7 @@ public class Player extends User {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Player) {
-			return ((Player) obj).getEmail() == this.email;
+			return ((Player) obj).getId() == this.id;
 		}
 		return false;
 	}

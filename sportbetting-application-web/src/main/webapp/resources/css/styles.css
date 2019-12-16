@@ -108,3 +108,8 @@ table tr td {
 .hide-remove td {
 	padding: 3px 6px 3px 6px	
 }
+
+a, a:hover {
+	color: white;
+	text-decoration: none;
+}

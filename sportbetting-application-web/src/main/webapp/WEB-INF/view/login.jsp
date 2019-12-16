@@ -10,9 +10,7 @@
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/styles.css" />"
 	rel="stylesheet">
-<title>
-	<spring:message code="sportsBetting" />
-</title>
+<title><spring:message code="sportsBetting" /></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -27,24 +25,20 @@
 		</div>
 	</div>
 	<div class="login-message">
-		<span class="login-message-component blue-title">
-			<spring:message code="login_verb" />
-		</span>
-		<span class="login-message-component">
-			<spring:message code="or" />
-		</span>
-		<span class="login-message-component blue-title">
-			<spring:message code="register" />
-		</span>
-		<span class="login-message-component">
-			<spring:message code="toStart" />
+		<span class="login-message-component blue-title"> <spring:message
+				code="login_verb" />
+		</span> <span class="login-message-component"> <spring:message
+				code="or" />
+		</span> <span class="login-message-component blue-title"> <spring:message
+				code="register" />
+		</span> <span class="login-message-component"> <spring:message
+				code="toStart" />
 		</span>
 	</div>
 
 	<div class="card border-info mb-3 login-div" style="max-width: 18rem;">
 		<div class="card-header header-item">
-			<span class="card-title">
-				<spring:message code="login" />
+			<span class="card-title"> <spring:message code="login" />
 			</span>
 		</div>
 		<div class="card-body text-info">
@@ -64,8 +58,8 @@
 				<spring:message code="login" var="login" />
 				<input type="submit" class="btn btn-primary general-button"
 					value="${login}" />
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
+<%-- 				<input type="hidden" name="${_csrf.parameterName}" --%>
+<%-- 					value="${_csrf.token}" /> --%>
 			</form:form>
 		</div>
 	</div>

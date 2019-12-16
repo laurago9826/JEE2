@@ -1,9 +1,8 @@
 package com.sportbettings;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,7 +28,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
 
 	private User buildUserForAuthentication(com.sportsbettings.domain.User user) {
-		return new User(user.getEmail(), user.getPassword(), Arrays.asList(new SimpleGrantedAuthority("USER")));
+		return new User(user.getEmail(), user.getPassword(), Collections.emptyList());
 	}
 
 }

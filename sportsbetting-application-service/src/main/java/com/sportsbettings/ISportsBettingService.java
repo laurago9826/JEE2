@@ -23,13 +23,13 @@ public interface ISportsBettingService {
 
 	void createTestData();
 
-	// Player findPlayerById(int id);
-
 	boolean eventNotStarted(Wager w);
 
 	void deleteWager(int id);
 	
 	User findUserByEmail(String email);
+	
+	Player findPlayerByEmail(String email);
 
 	void logoutPlayer();
 

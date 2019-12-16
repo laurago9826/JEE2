@@ -68,6 +68,7 @@ public class SportsBettingService implements ISportsBettingService {
 	public void savePlayer(Player player) {
 		currentPlayer = player;
 		playerRepository.save(player);
+		LOGGER.info("player saved");
 	}
 
 	public void logoutPlayer() {
@@ -161,6 +162,11 @@ public class SportsBettingService implements ISportsBettingService {
 		return Lists.newArrayList(userRepository.findAll()).stream().filter(x -> x.getEmail().equals(email)).findAny()
 				.orElse(null);
 	}
+	
+	public Player findPlayerByEmail(String email) {
+		return Lists.newArrayList(playerRepository.findAll()).stream().filter(x -> x.getEmail().equals(email)).findAny()
+				.orElse(null);
+	}
 
 	@PostConstruct
 	public void createTestData() {
@@ -219,5 +225,6 @@ public class SportsBettingService implements ISportsBettingService {
 		this.saveWager(w2);
 		this.saveWager(w3);
 		this.saveWager(w4);
+		playerRepository.save(currentPlayer);
 	}
 }

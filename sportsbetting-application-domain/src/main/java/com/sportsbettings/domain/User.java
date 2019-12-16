@@ -20,6 +20,15 @@ public class User {
 
 	protected String password;
 
+	public User() {
+		// hibernate
+	}
+	
+	public User(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -27,13 +36,8 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-
-	public User(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
-
-	public User() {
-		// hibernate
+	
+	public int getId() {
+		return id;
 	}
 }
